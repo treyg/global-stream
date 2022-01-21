@@ -5,6 +5,7 @@ const notion = new Client({
   notionVersion: "2021-05-13",
 });
 
+//function to get types for show/movie
 async function getTypes() {
   const database = await notion.databases.retrieve({
     database_id: process.env.NOTION_DATABASE_ID,
@@ -16,6 +17,7 @@ async function getTypes() {
   });
 }
 
+// function to get properties for type
 function notionPropertiesById(properties) {
   return Object.values(properties).reduce((obj, property) => {
     const { id, ...rest } = property;
@@ -23,6 +25,7 @@ function notionPropertiesById(properties) {
   }, {});
 }
 
+//function to build push new tile to notion
 function createWatchSuggestion({ title, summary, isWatched, url, types }) {
   notion.pages.create({
     parent: {

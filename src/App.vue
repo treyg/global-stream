@@ -4,18 +4,16 @@
       <router-link to="/about">About</router-link>
     </div>
     <Search />
-    <Notion />
     <PopularMovies />
   </div>
 </template>
 <script>
 import Search from "./components/Search.vue";
 import PopularMovies from "./components/PopularMovies.vue";
-import Notion from "./components/Notion.vue";
 
 export default {
   name: "App",
-  components: { Search, Notion, PopularMovies },
+  components: { Search, PopularMovies },
 };
 </script>
 <style>

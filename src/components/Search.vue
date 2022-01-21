@@ -11,7 +11,7 @@
       <button class="button is-primary" @click="searchFor">Search</button>
     </div>
     <div class="search-results">
-      <MovieCard
+      <MediaCard
         v-for="{
           movie,
           id,
@@ -19,9 +19,12 @@
           vote_average,
           release_date,
           poster_path,
-        } in movies"
+          overview,
+        } in results"
         :key="id"
         :title="title"
+        :type="movie"
+        :summary="overview"
         :vote_average="vote_average"
         :release_date="release_date"
         :poster_path="`${STATIC_API}${poster_path}`"
@@ -31,14 +34,14 @@
 </template>
 
 <script>
-import MovieCard from "./MovieCard.vue";
+import MediaCard from "./MediaCard.vue";
 export default {
-  components: { MovieCard },
+  components: { MediaCard },
   name: "Search",
   data() {
     return {
       search: "",
-      movies: [],
+      results: [],
       MAIN_API: "https://api.themoviedb.org/3/search/movie",
       STATIC_API: "https://image.tmdb.org/t/p/original/",
     };
@@ -49,11 +52,11 @@ export default {
         `${this.MAIN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&query=${this.search}`
       );
       const data = await response.json();
-      this.movies = data.results;
+      this.results = data.results;
       this.sortByRating();
     },
     sortByRating() {
-      this.movies.sort((a, b) => {
+      this.results.sort((a, b) => {
         return b.vote_average - a.vote_average;
       });
     },

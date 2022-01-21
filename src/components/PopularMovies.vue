@@ -2,7 +2,7 @@
   <div>
     <h2 class="title is-2">Popular Movies</h2>
     <section class="popular-movies section">
-      <MovieCard
+      <MediaCard
         v-for="{
           movie,
           id,
@@ -10,9 +10,12 @@
           vote_average,
           release_date,
           poster_path,
+          overview,
         } in popularMovies"
         :key="id"
         :title="title"
+        :type="movie"
+        :summary="overview"
         :vote_average="vote_average"
         :release_date="release_date"
         :poster_path="`${base_url}${poster_path}`"
@@ -22,10 +25,10 @@
 </template>
 
 <script>
-import MovieCard from "./MovieCard.vue";
+import MediaCard from "./MediaCard.vue";
 export default {
   name: "PopularMovies",
-  components: { MovieCard },
+  components: { MediaCard },
   data() {
     return {
       popularMovies: [],
@@ -48,6 +51,7 @@ export default {
       );
       const data = await response.json();
       this.popularMovies = data.results;
+      //console.log(data.results);
     },
   },
 };

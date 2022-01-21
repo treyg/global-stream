@@ -12,12 +12,15 @@
       </div>
       <p>{{ release_date | cutDate }}</p>
     </div>
+    <SaveButton />
   </article>
 </template>
 
 <script>
+import SaveButton from "./SaveButton.vue";
 export default {
-  name: "MovieCard",
+  name: "MediaCard",
+  components: { SaveButton },
   props: {
     title: String,
     vote_average: {
@@ -25,6 +28,11 @@ export default {
     },
     release_date: String,
     poster_path: String,
+    summary: String,
+    link: String,
+    url: String,
+    type: String,
+    onList: Boolean,
   },
   filters: {
     cutDate(value) {
