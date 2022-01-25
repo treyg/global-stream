@@ -70,10 +70,12 @@ function createWatchSuggestion({ title, summary, isWatched, url, types }) {
   });
 }
 
-module.exports = {
-  createWatchSuggestion,
-  getTypes,
-};
+// module.exports = {
+//   createWatchSuggestion,
+//   getTypes,
+// };
+
+export { createWatchSuggestion, getTypes };
 
 // getTypes().then((types) => {
 //   createWatchSuggestion({
