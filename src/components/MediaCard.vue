@@ -12,7 +12,7 @@
       </div>
       <p>{{ release_date | cutDate }}</p>
     </div>
-    <SaveButton />
+    <SaveButton v-on:addToWatchList="saveMedia" />
   </article>
 </template>
 
@@ -33,7 +33,36 @@ export default {
     url: String,
     type: String,
     onList: Boolean,
+    media: {},
   },
+  // async mounted() {
+  //   const API_URL = "http://localhost:3000/";
+  //   // Custom headers, but no need for content-type.
+  //   const headers = new Headers({
+  //     "Content-Type": "application/json",
+  //     "Access-Control-Allow-Origin": "*",
+  //   });
+
+  //   // If the fetch fails,
+  //   try {
+  //     // Fetch with custom headers.
+  //     const media = await fetch(API_URL, { headers })
+  //       .then((response) => response.json())
+  //       .then((movies) => movies);
+  //     // Then set the media object to data
+  //     this.media = media;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // },
+  methods: {
+    saveMedia() {
+      //function to push prop data to watchlist
+    },
+  },
+  // mounted() {
+  //   this.fetchBackend();
+  // },
   filters: {
     cutDate(value) {
       return value.slice(0, 4);
