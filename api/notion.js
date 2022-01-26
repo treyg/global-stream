@@ -26,7 +26,7 @@ function notionPropertiesById(properties) {
 }
 
 //function to build push new tile to notion
-function createWatchSuggestion({ title, summary, isWatched, url, types }) {
+function createWatchSuggestion({ title, summary, isWatched }) {
   notion.pages.create({
     parent: {
       database_id: process.env.NOTION_DATABASE_ID,
@@ -55,34 +55,19 @@ function createWatchSuggestion({ title, summary, isWatched, url, types }) {
       [process.env.NOTION_STATUS]: {
         checkbox: isWatched,
       },
-      [process.env.NOTION_LINK]: {
-        url: url,
-      },
-      [process.env.NOTION_TYPES]: {
-        multi_select: types.map((types) => {
-          return {
-            id: types.id,
-            //name: type.name,
-          };
-        }),
-      },
+      // [process.env.NOTION_LINK]: {
+      //   url: url,
+      // },
+      // [process.env.NOTION_TYPES]: {
+      //   multi_select: types.map((types) => {
+      //     return {
+      //       id: types.id,
+      //       //name: type.name,
+      //     };
+      //   }),
+      // },
     },
   });
 }
 
-// module.exports = {
-//   createWatchSuggestion,
-//   getTypes,
-// };
-
 export { createWatchSuggestion, getTypes };
-
-// getTypes().then((types) => {
-//   createWatchSuggestion({
-//     title: "Test Suggestion",
-//     summary: "Hello world",
-//     isWatched: false,
-//     url: "https://www.google.com",
-//     types: types,
-//   });
-// });

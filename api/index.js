@@ -1,40 +1,27 @@
 import express from "express";
-//import fetch from "node-fetch";
 import "dotenv/config";
-//import * as notion from "./notion.js";
-import cors from "cors";
-import bodyParser from "body-parser";
-
 const app = express();
+import * as notion from "./notion.js";
+import cors from "cors";
 
 app.use(cors());
-
-// Configuring body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-cors({ credentials: true, origin: true });
-
-app.listen(process.env.PORT, () => {
-  console.log("server started");
-});
-
-let watchlist = [];
-
-app.get("/", (req, res) => {
-  res.send(watchlist);
-});
+app.use(express.json());
+console.log(notion);
 
 app.post("/", (req, res) => {
-  // // We will be coding here
-  const item = { name: "John", age: 30, car: null };
+  console.log(req.body);
+  //notion.getTypes().then((types) => {
+  notion.createWatchSuggestion({
+    title: req.body.title,
+    summary: req.body.summary,
+    isWatched: false,
+    //url: req.body.url,
+    //types: req.body.types,
+  });
+  //});
+  res.send("added item");
+});
 
-  // Output the book to the console for debugging
-  console.log("Got body:", req.body);
-  watchlist.push(item);
-
-  res.send("Item is added to the database");
-
-  // console.log(req.body);
-  // res.status(201).send("created user");
+app.listen(process.env.PORT, () => {
+  console.log(`Example app listening on port ${process.env.PORT}`);
 });

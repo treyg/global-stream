@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import SaveButton from "./SaveButton.vue";
 export default {
   name: "MediaCard",
@@ -58,6 +59,19 @@ export default {
   methods: {
     saveMedia() {
       //function to push prop data to watchlist
+      axios
+        .post("http://localhost:3000/", {
+          title: this.title,
+          summary: this.summary,
+          url: this.url,
+          type: this.type,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
   // mounted() {
