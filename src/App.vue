@@ -3,17 +3,15 @@
     <div id="nav">
       <router-link to="/about">About</router-link>
     </div>
-    <Search />
-    <PopularMovies />
+
+    <div class="container">
+      <router-view />
+    </div>
   </div>
 </template>
 <script>
-import Search from "./components/Search.vue";
-import PopularMovies from "./components/PopularMovies.vue";
-
 export default {
   name: "App",
-  components: { Search, PopularMovies },
 };
 </script>
 <style>

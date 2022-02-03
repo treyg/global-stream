@@ -8,11 +8,14 @@
           id,
           title,
           vote_average,
+          original_language,
           release_date,
           poster_path,
           overview,
         } in popularMovies"
         :key="id"
+        :id="id"
+        :lang="original_language"
         :title="title"
         :type="movie"
         :summary="overview"
@@ -43,6 +46,7 @@ export default {
   },
   mounted: function () {
     this.getPopularMovies();
+    //this.getProviders();
   },
   methods: {
     async getPopularMovies() {
@@ -53,6 +57,14 @@ export default {
       this.popularMovies = data.results;
       //console.log(data.results);
     },
+    // async getProviders() {
+    //   const response = await fetch(
+    //     `https://api.themoviedb.org/3/movie/550/watch/providers?api_key=ab8b8bdb391668a664a3a019030bfc6e`
+    //   );
+    //   const data = await response.json();
+    //   //this.popularMovies = data.results;
+    //   console.log(data.results);
+    // },
   },
 };
 </script>

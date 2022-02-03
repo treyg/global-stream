@@ -62,7 +62,7 @@ function createWatchSuggestion({ title, summary, isWatched }) {
       //   multi_select: types.map((types) => {
       //     return {
       //       id: types.id,
-      //       //name: type.name,
+      //       name: type.name,
       //     };
       //   }),
       // },

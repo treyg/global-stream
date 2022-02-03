@@ -16,12 +16,15 @@
           movie,
           id,
           title,
+          original_language,
           vote_average,
           release_date,
           poster_path,
           overview,
         } in results"
         :key="id"
+        :id="id"
+        :lang="original_language"
         :title="title"
         :type="movie"
         :summary="overview"
@@ -61,9 +64,6 @@ export default {
       });
     },
   },
-  // filters: {
-  //   formatDate(date) {},
-  // },
 };
 </script>
 

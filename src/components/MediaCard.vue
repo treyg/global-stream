@@ -2,7 +2,7 @@
   <article class="card">
     <figure class="card-image">
       <img :src="poster_path" alt="" />
-      <span class="tag is-success">{{ vote_average }}</span>
+      <span class="tag is-success">{{ vote_average * 10 }}%</span>
     </figure>
     <div class="card-content">
       <div class="search-result-title">
@@ -13,12 +13,19 @@
       <p>{{ release_date | cutDate }}</p>
     </div>
     <SaveButton v-on:addToWatchList="saveMedia" />
+    <router-link
+      :to="{ name: 'MediaShow', params: { id: id } }"
+      class="button is-primary"
+    >
+      view
+    </router-link>
   </article>
 </template>
 
 <script>
 import axios from "axios";
 import SaveButton from "./SaveButton.vue";
+
 export default {
   name: "MediaCard",
   components: { SaveButton },
@@ -31,31 +38,16 @@ export default {
     poster_path: String,
     summary: String,
     link: String,
+    lang: String,
     url: String,
     type: String,
     onList: Boolean,
     media: {},
+    id: Number,
+    //Media Provider Data
+    provider: String,
+    provider_logo: String,
   },
-  // async mounted() {
-  //   const API_URL = "http://localhost:3000/";
-  //   // Custom headers, but no need for content-type.
-  //   const headers = new Headers({
-  //     "Content-Type": "application/json",
-  //     "Access-Control-Allow-Origin": "*",
-  //   });
-
-  //   // If the fetch fails,
-  //   try {
-  //     // Fetch with custom headers.
-  //     const media = await fetch(API_URL, { headers })
-  //       .then((response) => response.json())
-  //       .then((movies) => movies);
-  //     // Then set the media object to data
-  //     this.media = media;
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // },
   methods: {
     saveMedia() {
       //function to push prop data to watchlist
@@ -73,10 +65,10 @@ export default {
           console.log(error);
         });
     },
+    showID() {
+      console.log(this.lang);
+    },
   },
-  // mounted() {
-  //   this.fetchBackend();
-  // },
   filters: {
     cutDate(value) {
       return value.slice(0, 4);

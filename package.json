@@ -8,7 +8,6 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@notionhq/client": "^0.4.12",
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
