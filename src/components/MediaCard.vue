@@ -14,7 +14,7 @@
     </div>
     <SaveButton v-on:addToWatchList="saveMedia" />
     <router-link
-      :to="{ name: 'MediaShow', params: { id: id } }"
+      :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
       class="button is-primary"
     >
       view

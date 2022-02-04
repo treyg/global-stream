@@ -15,12 +15,16 @@ export default {
 };
 </script>
 <style>
+:root {
+  font-size: 10px;
+  font-size: 1.3vw;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
 #nav {
