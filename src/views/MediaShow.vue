@@ -93,14 +93,21 @@ export default {
         for (const [key, value] of Object.entries(this.streamable[property])) {
           if (key === "flatrate") {
             //Set each country stream options to an object
-            const countryObj = Object.values(value);
+            Object.values(value).map((obj) => {
+              //console.log(JSON.stringify(obj));
+              this.watchProviders.push(obj);
+            });
             //console.log(JSON.stringify(countryObj));
             //Return streaming options for each country object and push to array
-            Object.keys(countryObj).forEach((key) => {
-              const flatRateArr = Object.values(countryObj[key]);
-              this.watchProviders.push(flatRateArr[3]);
-              console.log(this.watchProviders);
-            });
+            // Object.keys(countryObj).forEach((key) => {
+            //   const flatRateArr = Object.values(countryObj[key]);
+            //   this.watchProviders.push(flatRateArr[3]);
+            //   console.log(this.watchProviders);
+            // });
+            //this.watchProviders = countryObj;
+            // const finalObj = Object.values(countryObj).map((obj) => {
+            //   console.log(obj);
+            // });
           }
         }
       }
@@ -197,6 +204,7 @@ article {
 
 .providers {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 2em;
 }
