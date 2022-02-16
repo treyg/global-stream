@@ -57,14 +57,6 @@ export default {
       this.popularMovies = data.results;
       //console.log(data.results);
     },
-    // async getProviders() {
-    //   const response = await fetch(
-    //     `https://api.themoviedb.org/3/movie/550/watch/providers?api_key=ab8b8bdb391668a664a3a019030bfc6e`
-    //   );
-    //   const data = await response.json();
-    //   //this.popularMovies = data.results;
-    //   console.log(data.results);
-    // },
   },
 };
 </script>
