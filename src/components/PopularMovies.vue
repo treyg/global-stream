@@ -46,7 +46,6 @@ export default {
   },
   mounted: function () {
     this.getPopularMovies();
-    //this.getProviders();
   },
   methods: {
     async getPopularMovies() {

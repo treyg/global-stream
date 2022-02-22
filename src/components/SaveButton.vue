@@ -11,16 +11,7 @@
 export default {
   name: "SaveButton",
   data() {
-    return {
-      //   apiURL: "http://localhost:3000/",
-      //   restults: [],
-      //toggleAdd: "Save",
-      //   title: "",
-      //   type: "",
-      //   summary: "",
-      //   link: "",
-      //   isWatched: false,
-    };
+    return {};
   },
   methods: {
     addToWatchlist() {
@@ -38,5 +29,11 @@ button {
   font-size: 2.5em;
   width: 8em;
   height: 2.5em;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 </style>

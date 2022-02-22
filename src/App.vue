@@ -35,6 +35,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--text-primary);
+  background-color: var(--bg-primary);
 }
 
 #nav {
@@ -55,6 +56,7 @@ img {
   border-radius: 0.8em;
   display: block;
   position: relative;
+  max-width: 100%;
 }
 
 article {

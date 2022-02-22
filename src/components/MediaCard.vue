@@ -6,7 +6,9 @@
     </figure>
     <div class="card-content">
       <div class="search-result-title">
-        <p>{{ release_date | cutDate }}</p>
+        <p class="release-date" v-if="release_date">
+          {{ release_date | cutDate }}
+        </p>
         <h2>
           {{ title }}
         </h2>
@@ -16,8 +18,8 @@
     </div>
     <SaveButton v-on:addToWatchList="saveMedia" />
     <router-link
+      class="view-media"
       :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
-      class="button is-primary"
     >
       view
     </router-link>
@@ -85,6 +87,31 @@ export default {
   margin-top: 4em;
 }
 
+h2 {
+  font-size: 4.4em;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size: 3.5em;
+  font-style: italic;
+  margin: 0 0 0.2em 0;
+}
+
+p {
+  font-size: 2.5em;
+  margin: 0 0 1.5em 0;
+}
+
+.release-date {
+  font-size: 2.8em;
+  margin: 0;
+}
+
+figure {
+  position: relative;
+}
+
 .votes {
   position: absolute;
   top: 0;
@@ -98,5 +125,11 @@ export default {
 
 .card {
   margin-bottom: 2em;
+}
+
+.view-media {
+  color: white;
+  font-size: 2.5em;
+  text-decoration: none;
 }
 </style>
