@@ -1,24 +1,17 @@
-# move-app
+# Where Can I Watch - Movie App
 
-## Project setup
-```
-npm install
-```
+Movie finder application that uses TMDB API to allow users to search movies globally and find streaming options for any provider.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Movies can be added to a watchlist that uses Notion as a backend and syncs with frontend.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Built with Vue, Node and Express.
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Todo
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [ ] Create modal to show available streaming locations for each provider.
+- [ ] Build components to show cast on movie pages.
+- [ ] Add select option for which countries' popular movies show on homepage
+- [ ] Make API fetch methods reusable/cleanup repeated code
+- [ ] Add TV filter option for search
+- [ ] Add authenication so any user can connect Notion account
+- [ ] Style globally.
