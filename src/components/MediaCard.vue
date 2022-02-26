@@ -110,6 +110,7 @@ p {
 
 figure {
   position: relative;
+  margin-bottom: 3em;
 }
 
 .votes {

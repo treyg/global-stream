@@ -101,13 +101,10 @@ export default {
         country: arr[0],
         providerId: arr[1].flatrate[0].provider_id,
       }));
-      //Filter out the countries with the matching platform_id
-      mappedProviders.forEach((provider) => {
-        if (provider.providerId == platform_id) {
-          console.log(provider.country);
-          //this.placesToWatch.push(provider.country);
-        }
-      });
+      this.placesToWatch = mappedProviders.filter(
+        (provider) => provider.providerId == platform_id
+      );
+      alert(this.placesToWatch.map((provider) => provider.country));
     },
   },
   mounted: async function () {
@@ -158,7 +155,7 @@ article {
 
 ::v-deep .media-card figure {
   width: 47em;
-  margin: auto;
+  margin: auto auto 3em auto;
   position: relative;
 }
 
