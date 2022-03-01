@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="title is-2">Popular Movies</h2>
-    <section class="popular-movies section">
+    <section class="popular-movies">
       <MediaCard
         v-for="{
           movie,
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       popularMovies: [],
-      lang: "en-US",
+      lang: "kor",
       sort_by: "popularity.desc",
       include_adult: false,
       include_video: false,
@@ -50,11 +50,10 @@ export default {
   methods: {
     async getPopularMovies() {
       const response = await fetch(
-        `${this.STATIC_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&page=${this.page}`
+        `${this.STATIC_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&language=${this.lang}&page=${this.page}`
       );
       const data = await response.json();
       this.popularMovies = data.results;
-      //console.log(data.results);
     },
   },
 };
@@ -66,5 +65,9 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 2em;
+}
+h2 {
+  font-size: 5em;
+  margin-bottom: 0;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <nav id="nav">
       <router-link to="/about">About</router-link>
-    </div>
+    </nav>
 
     <div class="container">
       <router-view />
@@ -38,17 +38,21 @@ export default {
   background-color: var(--bg-primary);
 }
 
-#nav {
-  padding: 30px;
+nav {
+  height: 3em;
   background-color: var(--bg-secondary);
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#nav a {
+nav a {
   font-weight: bold;
   color: var(--text-primary);
 }
 
-#nav a.router-link-exact-active {
+nav a.router-link-exact-active {
   color: #42b983;
 }
 

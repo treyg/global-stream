@@ -84,7 +84,6 @@ export default {
 
 <style scoped>
 .media-card {
-  margin-top: 4em;
 }
 
 h2 {

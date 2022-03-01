@@ -29,11 +29,11 @@ button {
   font-size: 2.5em;
   width: 8em;
   height: 2.5em;
+  cursor: pointer;
 }
 
 button:hover {
   transform: translateY(-1px);
   transition: 0.3s ease;
-  cursor: pointer;
 }
 </style>

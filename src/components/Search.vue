@@ -70,9 +70,30 @@ export default {
 <style scoped>
 .search-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 0.2em;
+  justify-content: center;
+  gap: 0.5em;
+  width: 85vw;
+  margin: 0 auto;
+}
+
+input {
+  border-radius: 0.3em;
+  height: 2em;
+  border: 0.1em solid var(--primary);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  text-indent: 0.5em;
+  width: 100%;
+}
+
+::placeholder {
+  font-size: 1em;
+}
+
+.input:focus {
+  outline: none !important;
+  box-shadow: 0 0 0.5em rgba(104, 207, 248, 0.644);
 }
 
 .search-results {
