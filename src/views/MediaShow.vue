@@ -9,7 +9,6 @@
           <MediaCard
             :lang="mediaInfo.original_language"
             :tagline="mediaInfo.tagline"
-            :title="mediaInfo.title"
             :summary="mediaInfo.overview"
             :vote_average="mediaInfo.vote_average"
             :release_date="mediaInfo.release_date"
@@ -66,6 +65,7 @@ export default {
       const streams = Object.entries(this.locations).filter((media) =>
         Object.prototype.hasOwnProperty.call(media[1], "flatrate")
       );
+
       //convert streams to object
       this.locations = streams.reduce((acc, curr) => {
         acc[curr[0]] = curr[1];
@@ -104,7 +104,14 @@ export default {
       this.placesToWatch = mappedProviders.filter(
         (provider) => provider.providerId == platform_id
       );
-      alert(this.placesToWatch.map((provider) => provider.country));
+      //Set placesToWatch as provider.country and convert country codes to country names
+      this.placesToWatch.map((provider) => {
+        const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
+          type: "region",
+        });
+        regionNamesInEnglish.of(provider.country);
+        console.log(regionNamesInEnglish.of(provider.country));
+      });
     },
   },
   mounted: async function () {
@@ -114,6 +121,9 @@ export default {
 };
 </script>
 <style scoped>
+main {
+  padding-bottom: 5em;
+}
 .main-content {
   width: 100%;
   display: flex;
@@ -163,6 +173,10 @@ article {
   width: 47em;
   margin: auto;
   box-shadow: 0 0.5em 1.3em 0.7em rgba(13, 35, 42, 0.54);
+}
+
+::v-deep .media-card .view-media {
+  display: none;
 }
 
 .where-to-watch {
