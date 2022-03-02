@@ -18,7 +18,6 @@ export default {
     //   this.$emit("show-locations");
     // },
   },
-  filters: {},
 };
 </script>
 

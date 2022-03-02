@@ -72,7 +72,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5em;
+  gap: 1em;
   width: 85vw;
   margin: 0 auto;
 }

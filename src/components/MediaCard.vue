@@ -83,9 +83,6 @@ export default {
 </script>
 
 <style scoped>
-.media-card {
-}
-
 h2 {
   font-size: 4.4em;
   margin-bottom: 0.5em;

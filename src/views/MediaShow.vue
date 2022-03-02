@@ -29,17 +29,33 @@
           </div>
         </div>
       </article>
+
+      <location-modal v-if="showModal" @close="showModal = false">
+        <template v-slot:countries>
+          <ul>
+            <li
+              v-for="country in placesToWatch"
+              :key="country.id"
+              :country="country.country"
+            >
+              {{ country.country | fullCountryName }}
+            </li>
+          </ul>
+        </template>
+      </location-modal>
     </main>
   </div>
 </template>
 <script>
-import WatchProviders from "../components/WatchProviders.vue";
-import MediaCard from "../components/MediaCard.vue";
+import WatchProviders from "@/components/WatchProviders.vue";
+import MediaCard from "@/components/MediaCard.vue";
+import LocationModal from "../components/LocationModal.vue";
 export default {
   name: "MediaShow",
-  components: { WatchProviders, MediaCard },
+  components: { WatchProviders, MediaCard, LocationModal },
   data() {
     return {
+      showModal: false,
       mediaInfo: [],
       mediaID: this.$route.params.id,
       lang: this.$route.params.lang,
@@ -101,17 +117,23 @@ export default {
         country: arr[0],
         providerId: arr[1].flatrate[0].provider_id,
       }));
+      //Filter out the countries with the matching platform_id
       this.placesToWatch = mappedProviders.filter(
         (provider) => provider.providerId == platform_id
       );
-      //Set placesToWatch as provider.country and convert country codes to country names
+      //Set placesToWatch as provider.country
       this.placesToWatch.map((provider) => {
-        const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
-          type: "region",
-        });
-        regionNamesInEnglish.of(provider.country);
-        console.log(regionNamesInEnglish.of(provider.country));
+        provider.country;
       });
+      this.showModal = true;
+    },
+  },
+  filters: {
+    fullCountryName(country) {
+      const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
+        type: "region",
+      });
+      return regionNamesInEnglish.of(country);
     },
   },
   mounted: async function () {

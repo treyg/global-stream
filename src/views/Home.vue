@@ -2,8 +2,8 @@
   <div class="home">
     <section class="hero">
       <h1>Find Where To Stream Any Movie</h1>
+      <Search />
     </section>
-    <Search />
     <PopularMovies />
   </div>
 </template>
@@ -17,7 +17,8 @@ export default {
 </script>
 <style scoped>
 .hero {
-  height: 50vh;
+  height: 100%;
+  min-height: 36vh;
   background-image: linear-gradient(
     180deg,
     hsl(206deg 29% 9%) 0%,
@@ -31,8 +32,8 @@ export default {
   );
 
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  padding-top: 29em;
 }
 
 h1 {
