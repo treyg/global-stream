@@ -81,7 +81,6 @@ export default {
       const streams = Object.entries(this.locations).filter((media) =>
         Object.prototype.hasOwnProperty.call(media[1], "flatrate")
       );
-
       //convert streams to object
       this.locations = streams.reduce((acc, curr) => {
         acc[curr[0]] = curr[1];
@@ -92,7 +91,7 @@ export default {
       for (const property in this.locations) {
         for (const [key, value] of Object.entries(this.locations[property])) {
           if (key === "flatrate") {
-            //Set each country stream options to an object
+            //Set each country's stream options to an object
             Object.values(value).map((obj) => {
               this.watchProviders.push(obj);
               //Filter out duplicate providers by provider_id
@@ -116,11 +115,19 @@ export default {
         //Set indexes to the country name and the stream options
         country: arr[0],
         providerId: arr[1].flatrate[0].provider_id,
+        //check if arr[1].flatrate[1] exists to allow multiple stream options per country
+        provider_IdAlt:
+          arr[1].flatrate[1] !== undefined
+            ? arr[1].flatrate[1].provider_id
+            : null,
       }));
       //Filter out the countries with the matching platform_id
-      this.placesToWatch = mappedProviders.filter(
-        (provider) => provider.providerId == platform_id
-      );
+      this.placesToWatch = mappedProviders.filter((provider) => {
+        return (
+          provider.providerId == platform_id ||
+          provider.provider_IdAlt == platform_id
+        );
+      });
       //Set placesToWatch as provider.country
       this.placesToWatch.map((provider) => {
         provider.country;
