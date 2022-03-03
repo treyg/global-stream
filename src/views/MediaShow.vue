@@ -197,7 +197,7 @@ article {
   box-shadow: 0 0.5em 1.3em 0.7em rgba(13, 35, 42, 0.54);
 }
 
-::v-deep .media-card .view-media {
+::v-deep .media-card .view-media-btn {
   display: none;
 }
 

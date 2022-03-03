@@ -1,46 +1,39 @@
 <template>
   <div>
-    <h2 class="title is-2">Popular Movies</h2>
+    <h2>Popular Movies</h2>
     <section class="popular-movies">
-      <MediaCard
-        v-for="{
-          movie,
-          id,
-          title,
-          vote_average,
-          original_language,
-          release_date,
-          poster_path,
-          overview,
-        } in popularMovies"
-        :key="id"
-        :id="id"
-        :lang="original_language"
-        :title="title"
-        :type="movie"
-        :summary="overview"
-        :vote_average="vote_average"
-        :release_date="release_date"
-        :poster_path="`${base_url}${poster_path}`"
-      />
+      <vue-horizontal :button="false" class="scroll-container">
+        <MediaCard
+          class="popular-card"
+          v-for="movie in popularMovies"
+          :key="movie.id"
+          :id="movie.id"
+          :lang="movie.original_language"
+          :type="movie.movie"
+          :vote_average="movie.vote_average"
+          :poster_path="`${base_url}${movie.poster_path}`"
+        />
+      </vue-horizontal>
     </section>
   </div>
 </template>
 
 <script>
 import MediaCard from "./MediaCard.vue";
+import VueHorizontal from "vue-horizontal";
+
 export default {
   name: "PopularMovies",
-  components: { MediaCard },
+  components: { MediaCard, VueHorizontal },
   data() {
     return {
       popularMovies: [],
-      lang: "kor",
+      lang: "en-US",
       sort_by: "popularity.desc",
       include_adult: false,
       include_video: false,
       page: 1,
-      base_url: "https://image.tmdb.org/t/p/w500",
+      base_url: "https://image.tmdb.org/t/p/w500/",
       STATIC_API: "https://api.themoviedb.org/3/discover/movie",
     };
   },
@@ -60,14 +53,38 @@ export default {
 </script>
 
 <style scoped>
-.popular-movies {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 2em;
-}
 h2 {
-  font-size: 5em;
+  font-size: 5.5em;
   margin-bottom: 0;
+  text-align: left;
+  margin-left: 0.8em;
+}
+
+/* Hide MediaCard buttons for popular movies */
+::v-deep .media-card figure {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+::v-deep .media-card button,
+::v-deep .media-card .view-media-btn {
+  display: none;
+}
+
+/* Scroll container styling */
+.scroll-container >>> .v-hl-container {
+  gap: 2em;
+  margin-bottom: 0;
+}
+
+.scroll-container >>> .v-hl-container:not(.v-hl-scroll) {
+  margin-bottom: 0;
+}
+
+/* Set how many horizontal cards to show on smaller screens */
+@media (max-width: 640px) {
+  .popular-card {
+    width: calc((100% - (24px)) / 2.2);
+  }
 }
 </style>

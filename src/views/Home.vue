@@ -18,7 +18,6 @@ export default {
 <style scoped>
 .hero {
   height: 100%;
-  min-height: 36vh;
   background-image: linear-gradient(
     180deg,
     hsl(206deg 29% 9%) 0%,
@@ -30,10 +29,9 @@ export default {
     hsl(200deg 20% 17%) 86%,
     hsl(200deg 19% 18%) 100%
   );
-
   display: flex;
   flex-direction: column;
-  padding-top: 29em;
+  padding: 25em 0 15em;
 }
 
 h1 {

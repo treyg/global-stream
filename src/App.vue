@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav id="nav">
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Home</router-link>
     </nav>
 
     <div class="container">
@@ -24,7 +24,6 @@ export default {
   --primary-lighter: #3d7082;
   --success: #03dac5;
   --danger: #ec4279;
-  --mild: #ffc107;
   --text-primary: #fbfcfd;
   --icon: #617b8a;
 }
@@ -50,10 +49,11 @@ nav {
 nav a {
   font-weight: bold;
   color: var(--text-primary);
+  font-size: 1.5em;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--success);
 }
 
 img {
@@ -64,6 +64,7 @@ img {
 }
 
 article {
-  padding-top: 10em;
+  padding-top: 8em;
+  max-width: 100vw;
 }
 </style>

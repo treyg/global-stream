@@ -1,11 +1,16 @@
 <template>
   <article class="media-card">
-    <figure class="card-image">
-      <img :src="poster_path" alt="" />
-      <span class="votes">{{ vote_average * 10 }}%</span>
-    </figure>
-    <div class="card-content">
-      <div class="search-result-title">
+    <router-link
+      class="image-link"
+      :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
+    >
+      <figure>
+        <img :src="poster_path" alt="" />
+        <span class="votes">{{ vote_average * 10 }}%</span>
+      </figure>
+    </router-link>
+    <div>
+      <div>
         <p class="release-date" v-if="release_date">
           {{ release_date | cutDate }}
         </p>
@@ -16,13 +21,15 @@
       </div>
       <p v-if="summary">{{ summary }}</p>
     </div>
-    <SaveButton v-on:addToWatchList="saveMedia" />
-    <router-link
-      class="view-media"
-      :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
-    >
-      view
-    </router-link>
+    <div class="button-container">
+      <SaveButton v-on:addToWatchList="saveMedia" />
+      <router-link
+        class="view-media-btn"
+        :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
+      >
+        View
+      </router-link>
+    </div>
   </article>
 </template>
 
@@ -83,6 +90,9 @@ export default {
 </script>
 
 <style scoped>
+/* .media-card {
+  max-width: 80em;
+} */
 h2 {
   font-size: 4.4em;
   margin-bottom: 0.5em;
@@ -118,15 +128,33 @@ figure {
   display: block;
   border-top-right-radius: 0.32em;
   background-color: var(--success);
+  color: var(--text-primary);
 }
 
 .card {
   margin-bottom: 2em;
 }
 
-.view-media {
-  color: white;
-  font-size: 2.5em;
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+  align-items: center;
+}
+
+.view-media-btn {
+  color: var(--text-primary);
+  font-size: 2.8em;
   text-decoration: none;
+  background-color: var(--success);
+  border: none;
+  border-radius: 0.32em;
+  font-size: 2.5em;
+  width: 8em;
+  height: 2.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -6,31 +6,20 @@
         v-model="search"
         v-on:keyup.enter="searchFor"
         placeholder="Search for a movie..."
-        class="input is-primary"
       />
-      <button class="button is-primary" @click="searchFor">Search</button>
+      <button @click="searchFor">Search</button>
     </div>
     <div class="search-results">
       <MediaCard
-        v-for="{
-          movie,
-          id,
-          title,
-          original_language,
-          vote_average,
-          release_date,
-          poster_path,
-          overview,
-        } in results"
-        :key="id"
-        :id="id"
-        :lang="original_language"
-        :title="title"
-        :type="movie"
-        :summary="overview"
-        :vote_average="vote_average"
-        :release_date="release_date"
-        :poster_path="`${STATIC_API}${poster_path}`"
+        v-for="result in results"
+        :key="result.id"
+        :id="result.id"
+        :lang="result.original_language"
+        :title="result.title"
+        :type="result.movie"
+        :vote_average="result.vote_average"
+        :release_date="result.release_date"
+        :poster_path="`${STATIC_API}${result.poster_path}`"
       />
     </div>
   </section>
@@ -73,13 +62,13 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 1em;
-  width: 85vw;
+  width: 90vw;
   margin: 0 auto;
 }
 
 input {
   border-radius: 0.3em;
-  height: 2em;
+  height: 5.5rem;
   border: 0.1em solid var(--primary);
   background-color: var(--bg-secondary);
   color: var(--text-primary);
@@ -88,7 +77,7 @@ input {
 }
 
 ::placeholder {
-  font-size: 1em;
+  font-size: 2.4rem;
 }
 
 .input:focus {
@@ -100,6 +89,7 @@ input {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 2em;
+  max-width: 90%;
+  margin: 2em auto;
 }
 </style>
