@@ -29,6 +29,7 @@ export default {
     return {
       popularMovies: [],
       lang: "en-US",
+      region: "US",
       sort_by: "popularity.desc",
       include_adult: false,
       include_video: false,
@@ -43,7 +44,7 @@ export default {
   methods: {
     async getPopularMovies() {
       const response = await fetch(
-        `${this.STATIC_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&language=${this.lang}&page=${this.page}`
+        `${this.STATIC_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&language=${this.lang}&region=${this.region}&page=${this.page}`
       );
       const data = await response.json();
       this.popularMovies = data.results;
@@ -75,6 +76,7 @@ h2 {
 .scroll-container >>> .v-hl-container {
   gap: 2em;
   margin-bottom: 0;
+  margin: 0 0 0 3em;
 }
 
 .scroll-container >>> .v-hl-container:not(.v-hl-scroll) {
@@ -82,9 +84,14 @@ h2 {
 }
 
 /* Set how many horizontal cards to show on smaller screens */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .popular-card {
     width: calc((100% - (24px)) / 2.2);
+  }
+}
+@media (min-width: 769px) {
+  .popular-card {
+    width: calc((100% - (24px)) / 4.3);
   }
 }
 </style>

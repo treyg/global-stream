@@ -62,7 +62,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 1em;
-  width: 90vw;
+  padding: 0 3rem;
   margin: 0 auto;
 }
 
@@ -80,8 +80,8 @@ input {
   font-size: 2.4rem;
 }
 
-.input:focus {
-  outline: none !important;
+input:focus {
+  outline: none;
   box-shadow: 0 0 0.5em rgba(104, 207, 248, 0.644);
 }
 

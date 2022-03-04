@@ -77,7 +77,7 @@ export default {
           console.log(error);
         });
     },
-    showID() {
+    showLang() {
       console.log(this.lang);
     },
   },
@@ -90,9 +90,6 @@ export default {
 </script>
 
 <style scoped>
-/* .media-card {
-  max-width: 80em;
-} */
 h2 {
   font-size: 4.4em;
   margin-bottom: 0.5em;

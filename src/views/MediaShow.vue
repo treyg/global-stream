@@ -23,6 +23,7 @@
             <WatchProviders
               v-for="provider in watchProviders"
               :key="provider.provider_id"
+              :provider_name="provider.provider_name"
               :logo_path="`${poster_base_url}${provider.logo_path}`"
               @click.native="showCountriesAvailable(provider.provider_id)"
             />
@@ -111,22 +112,36 @@ export default {
     },
     showCountriesAvailable(platform_id) {
       //Map through the locations object and find the country with the matching platform_id
-      const mappedProviders = Object.entries(this.locations).map((arr) => ({
+      const mappedProviders = Object.entries(this.locations).map(
         //Set indexes to the country name and the stream options
-        country: arr[0],
-        providerId: arr[1].flatrate[0].provider_id,
-        //check if arr[1].flatrate[1] exists to allow multiple stream options per country
-        provider_IdAlt:
-          arr[1].flatrate[1] !== undefined
-            ? arr[1].flatrate[1].provider_id
-            : null,
-      }));
+        ([country, provider]) => ({
+          country,
+          //Check if the country has a flatrate stream option - up to 4
+          providerId: provider.flatrate[0].provider_id,
+          provider_IdAlt: provider.flatrate[1]?.provider_id || null,
+          provider_IdAlt2: provider.flatrate[2]?.provider_id || null,
+          provider_IdAlt3: provider.flatrate[3]?.provider_id || null,
+          provider_IdAlt4: provider.flatrate[4]?.provider_id || null,
+        })
+      );
       //Filter out the countries with the matching platform_id
       this.placesToWatch = mappedProviders.filter((provider) => {
-        return (
-          provider.providerId == platform_id ||
-          provider.provider_IdAlt == platform_id
-        );
+        //Destructure the provider object
+        const {
+          providerId,
+          provider_IdAlt,
+          provider_IdAlt2,
+          provider_IdAlt3,
+          provider_IdAlt4,
+        } = provider;
+        //Check if the country provider_id matches the platform_id
+        return [
+          providerId,
+          provider_IdAlt,
+          provider_IdAlt2,
+          provider_IdAlt3,
+          provider_IdAlt4,
+        ].includes(platform_id);
       });
       //Set placesToWatch as provider.country
       this.placesToWatch.map((provider) => {
