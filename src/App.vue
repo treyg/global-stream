@@ -4,7 +4,9 @@
       <router-link to="/">Home</router-link>
     </nav>
     <div class="container">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -34,6 +36,7 @@ export default {
   text-align: center;
   color: var(--text-primary);
   background-color: var(--bg-primary);
+  min-height: 100vh;
 }
 
 nav {
@@ -65,5 +68,17 @@ img {
 article {
   padding-top: 8em;
   max-width: 100vw;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.2s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
