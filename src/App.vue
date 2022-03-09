@@ -23,7 +23,7 @@ export default {
   --bg-secondary: #37474f;
   --primary: #4bcffa;
   --primary-lighter: #3d7082;
-  --success: #03dac5;
+  --success: #03beac;
   --danger: #ec4279;
   --text-primary: #fbfcfd;
   --icon: #617b8a;

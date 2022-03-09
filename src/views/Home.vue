@@ -5,14 +5,16 @@
       <Search />
     </section>
     <PopularMovies />
+    <TopRatedMovies />
   </div>
 </template>
 <script>
 import Search from "../components/Search.vue";
 import PopularMovies from "../components/PopularMovies.vue";
+import TopRatedMovies from "../components/TopRatedMovies.vue";
 export default {
   name: "Home",
-  components: { Search, PopularMovies },
+  components: { Search, PopularMovies, TopRatedMovies },
 };
 </script>
 <style scoped>

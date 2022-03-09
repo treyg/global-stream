@@ -114,6 +114,14 @@ p {
 figure {
   position: relative;
   margin-bottom: 3em;
+  transition: transform 0.2s ease-in-out;
+}
+
+figure:hover {
+  /* border: 0.2em solid var(--success); */
+  border-radius: 0.8em;
+  transform: scale(1.01);
+  box-shadow: 0 0.5em 1.3em 0.7em rgba(13, 35, 42, 0.54);
 }
 
 .votes {
@@ -123,7 +131,7 @@ figure {
   font-size: 2.5em;
   width: 3.5em;
   display: block;
-  border-top-right-radius: 0.32em;
+  border-top-right-radius: 0.18em;
   background-color: var(--success);
   color: var(--text-primary);
 }
