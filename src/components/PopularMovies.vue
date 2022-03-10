@@ -1,6 +1,13 @@
 <template>
   <div>
-    <h2>Popular Movies</h2>
+    <h2>
+      Popular in
+      <select v-model="selectedRegion" @change="getPopularMovies">
+        <option v-for="region in regions" :key="region.id" :value="region.id">
+          {{ region.name }}
+        </option>
+      </select>
+    </h2>
     <section class="popular-movies">
       <vue-horizontal :button="false" class="scroll-container">
         <MediaCard
@@ -21,6 +28,7 @@
 <script>
 import MediaCard from "./MediaCard.vue";
 import VueHorizontal from "vue-horizontal";
+import regionData from "../region_data.json";
 
 export default {
   name: "PopularMovies",
@@ -29,7 +37,8 @@ export default {
     return {
       popularMovies: [],
       lang: "en-US",
-      region: "US",
+      selectedRegion: "US",
+      regions: regionData,
       sort_by: "popularity.desc",
       include_adult: false,
       include_video: false,
@@ -44,7 +53,7 @@ export default {
   methods: {
     async getPopularMovies() {
       const response = await fetch(
-        `${this.STATIC_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&language=${this.lang}&region=${this.region}&page=${this.page}`
+        `${this.STATIC_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&language=${this.lang}&region=${this.selectedRegion}&page=${this.page}`
       );
       const data = await response.json();
       this.popularMovies = data.results;
@@ -91,7 +100,7 @@ h2 {
 }
 @media (min-width: 769px) {
   .popular-card {
-    width: calc((100% - (24px)) / 4.3);
+    width: calc((100% - (24px)) / 7);
   }
 }
 </style>
