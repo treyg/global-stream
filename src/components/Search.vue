@@ -64,6 +64,7 @@ export default {
   gap: 1em;
   padding: 0 3rem;
   margin: 0 auto;
+  max-width: 78em;
 }
 
 input {

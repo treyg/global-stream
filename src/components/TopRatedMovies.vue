@@ -8,10 +8,10 @@
         </option>
       </select>
     </h2>
-    <section class="popular-movies">
+    <section class="top-rated-movies">
       <vue-horizontal :button="false" class="scroll-container">
         <MediaCard
-          class="popular-card"
+          class="top-rated-card"
           v-for="movie in topRatedMovies"
           :key="movie.id"
           :id="movie.id"
@@ -39,7 +39,7 @@ export default {
       lang: "en-US",
       selectedRegion: "US",
       regions: regionData,
-      sort_by: "popularity.desc",
+      sort_by: "top-ratedity.desc",
       page: 1,
       base_url: "https://image.tmdb.org/t/p/w500/",
       STATIC_API: "https://api.themoviedb.org/3/movie/top_rated",
@@ -69,22 +69,7 @@ h2 {
   margin-left: 0.8em;
 }
 
-select {
-  background-color: var(--bg-primary);
-  border: 0.1em solid var(--primary);
-  font-weight: inherit;
-  border-radius: 0.2em;
-  color: var(--text-primary);
-  font-size: 0.9em;
-}
-option {
-  font-size: 0.6em;
-  font-weight: normal;
-  border-radius: 0.2em;
-  padding: 2em;
-}
-
-/* Hide MediaCard buttons for popular movies */
+/* Hide MediaCard buttons for top-rated movies */
 ::v-deep .media-card figure {
   margin: 0;
   padding: 0;
@@ -108,13 +93,13 @@ option {
 
 /* Set how many horizontal cards to show on smaller screens */
 @media (max-width: 768px) {
-  .popular-card {
+  .top-rated-card {
     width: calc((100% - (24px)) / 2.2);
   }
 }
 @media (min-width: 769px) {
-  .popular-card {
-    width: calc((100% - (24px)) / 4.3);
+  .top-rated-card {
+    width: calc((100% - (24px)) / 7);
   }
 }
 </style>

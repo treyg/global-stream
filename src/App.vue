@@ -24,6 +24,7 @@ export default {
   --primary: #4bcffa;
   --primary-lighter: #3d7082;
   --success: #03beac;
+  --warning: #ffc107;
   --danger: #ec4279;
   --text-primary: #fbfcfd;
   --icon: #617b8a;
@@ -70,6 +71,21 @@ article {
   max-width: 100vw;
 }
 
+select {
+  background-color: var(--bg-primary);
+  border: none;
+  border-bottom: 0.05em solid var(--primary);
+  font-weight: inherit;
+  color: var(--text-primary);
+  font-size: 0.9em;
+}
+option {
+  font-size: 0.6em;
+  font-weight: normal;
+  border-radius: 0.2em;
+  padding: 2em;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.2s;
@@ -80,5 +96,22 @@ article {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+
+/* Mobile only styles */
+@media (max-width: 768px) {
+  .lg-only {
+    display: none;
+  }
+}
+
+/* Global desktop styles */
+@media (min-width: 769px) {
+  :root {
+    font-size: 0.521vw;
+  }
+  .sm-only {
+    display: none;
+  }
 }
 </style>

@@ -6,7 +6,9 @@
     >
       <figure>
         <img :src="poster_path" alt="" />
-        <span class="votes">{{ vote_average * 10 }}%</span>
+        <span class="votes" :class="computedRatingClass">
+          {{ vote_average * 10 }}%</span
+        >
       </figure>
     </router-link>
     <div>
@@ -81,6 +83,17 @@ export default {
       console.log(this.lang);
     },
   },
+  computed: {
+    computedRatingClass() {
+      if (this.vote_average >= 7.5) {
+        return "goodRating";
+      } else if (this.vote_average >= 6) {
+        return "averageRating";
+      } else {
+        return "badRating";
+      }
+    },
+  },
   filters: {
     cutDate(value) {
       return value.slice(0, 4);
@@ -118,7 +131,6 @@ figure {
 }
 
 figure:hover {
-  /* border: 0.2em solid var(--success); */
   border-radius: 0.8em;
   transform: scale(1.01);
   box-shadow: 0 0.5em 1.3em 0.7em rgba(13, 35, 42, 0.54);
@@ -132,8 +144,20 @@ figure:hover {
   width: 3.5em;
   display: block;
   border-top-right-radius: 0.18em;
-  background-color: var(--success);
   color: var(--text-primary);
+}
+
+.badRating {
+  background-color: var(--danger);
+}
+
+.averageRating {
+  background-color: var(--warning);
+  color: var(--bg-primary);
+}
+
+.goodRating {
+  background-color: var(--success);
 }
 
 .card {

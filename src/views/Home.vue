@@ -17,6 +17,7 @@ export default {
   components: { Search, PopularMovies, TopRatedMovies },
 };
 </script>
+
 <style scoped>
 .hero {
   height: 100%;
@@ -38,7 +39,8 @@ export default {
 
 h1 {
   font-size: 8em;
-  margin: 0 0 0.8em 0;
+  margin: 0 auto 0.8em auto;
+  max-width: 11em;
   line-height: 1.1;
   background: -webkit-linear-gradient(
     45deg,
@@ -48,5 +50,11 @@ h1 {
   background-clip: border-box;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 769px) {
+  h1 {
+    font-size: 10em;
+  }
 }
 </style>
