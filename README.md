@@ -9,7 +9,8 @@ Built with Vue, Node and Express.
 ### Todo
 
 - [x] Create modal to show available streaming locations for each provider.
-- [ ] Build components to show cast on movie pages.
+- [x] Build components to show cast on movie pages
+- [x] Add route transitions
 - [ ] Add select option for which countries' popular movies show on homepage
 - [ ] Make API fetch methods reusable/cleanup repeated code
 - [ ] Add TV filter option for search
