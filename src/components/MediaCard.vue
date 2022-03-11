@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     computedRatingClass() {
-      if (this.vote_average >= 7.5) {
+      if (this.vote_average >= 8) {
         return "goodRating";
       } else if (this.vote_average >= 6) {
         return "averageRating";

@@ -36,8 +36,8 @@
   { "id": "PE", "name": "Peru" },
   { "id": "SR", "name": "Suriname" },
   { "id": "TW", "name": "Taiwan" },
-  { "id": "US", "name": "USA" },
-  { "id": "GB", "name": "UK" },
+  { "id": "US", "name": "The US" },
+  { "id": "GB", "name": "The UK" },
   { "id": "UY", "name": "Uruguay" },
   { "id": "VE", "name": "Venezuela" },
   { "id": "VN", "name": "Vietnam" }

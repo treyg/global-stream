@@ -1,10 +1,5 @@
 <template>
-  <button
-    class="button is-primary is-small"
-    v-on:click="$emit('addToWatchList')"
-  >
-    Save
-  </button>
+  <button v-on:click="$emit('addToWatchList')">Save</button>
 </template>
 
 <script>

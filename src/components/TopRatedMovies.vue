@@ -39,7 +39,7 @@ export default {
       lang: "en-US",
       selectedRegion: "US",
       regions: regionData,
-      sort_by: "top-ratedity.desc",
+      sort_by: "top-rated.desc",
       page: 1,
       base_url: "https://image.tmdb.org/t/p/w500/",
       STATIC_API: "https://api.themoviedb.org/3/movie/top_rated",
