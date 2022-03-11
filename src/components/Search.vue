@@ -87,10 +87,26 @@ input:focus {
 }
 
 .search-results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   max-width: 90%;
-  margin: 2em auto;
+  margin: auto;
+  gap: 4em;
+  padding-bottom: 10em;
+}
+
+/* Adjust mediacard styles for search results */
+::v-deep .media-card button,
+::v-deep .media-card .view-media-btn {
+  display: none;
+}
+
+::v-deep .media-card h2,
+::v-deep .media-card p {
+  display: none;
+}
+
+::v-deep .media-card figure {
+  margin: 0;
 }
 </style>
