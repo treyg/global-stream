@@ -21,11 +21,11 @@ export default {
   font-size: 1.3vw;
   --bg-primary: #263238;
   --bg-secondary: #37474f;
-  --primary: #4bcffa;
+  --primary: #3ccafa;
   --primary-lighter: #3d7082;
   --success: #03beac;
   --warning: #ffc107;
-  --danger: #ec4279;
+  --danger: #ec356c;
   --text-primary: #fbfcfd;
   --icon: #617b8a;
 }
@@ -88,7 +88,7 @@ option {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: 0.2s;
+  transition-duration: 0.1s;
   transition-property: opacity;
   transition-timing-function: ease;
 }

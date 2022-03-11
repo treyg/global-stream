@@ -16,6 +16,7 @@
           />
         </div>
       </section>
+      <!-- Stream provider section -->
       <article class="where-to-watch">
         <div class="content-wrapper">
           <h2>Where to Stream</h2>
@@ -30,7 +31,23 @@
           </div>
         </div>
       </article>
+      <!-- Cast Section -->
+      <article>
+        <div class="content-wrapper">
+          <h2>Cast</h2>
+          <div class="cast">
+            <CastCard
+              v-for="person in cast.slice(0, 9)"
+              :key="person.d"
+              :name="person.name"
+              :character="person.character"
+              :img_path="`${poster_base_url}${person.profile_path}`"
+            />
+          </div>
+        </div>
+      </article>
 
+      <!-- Stream option modal -->
       <location-modal v-if="showModal" @close="showModal = false">
         <template v-slot:countries>
           <ul>
@@ -50,10 +67,11 @@
 <script>
 import WatchProviders from "@/components/WatchProviders.vue";
 import MediaCard from "@/components/MediaCard.vue";
+import CastCard from "@/components/CastCard.vue";
 import LocationModal from "../components/LocationModal.vue";
 export default {
   name: "MediaShow",
-  components: { WatchProviders, MediaCard, LocationModal },
+  components: { WatchProviders, MediaCard, CastCard, LocationModal },
   data() {
     return {
       showModal: false,
@@ -67,16 +85,18 @@ export default {
       watchProviders: [],
       locations: [],
       placesToWatch: [],
+      cast: [],
     };
   },
   methods: {
     async populateMediaInfo() {
       const response = await fetch(
-        `${this.STATIC_API}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos`
+        `${this.STATIC_API}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos,credits`
       );
       const data = await response.json();
       this.locations = data["watch/providers"].results;
       this.mediaInfo = data;
+      this.cast = data.credits.cast;
 
       // Filter to show only only countries with options to stream
       const streams = Object.entries(this.locations).filter((media) =>
@@ -228,7 +248,7 @@ article {
   background-color: var(--bg-primary);
 }
 
-.where-to-watch h2 {
+h2 {
   font-size: 4.5em;
   margin: 0 0 1.2em 0;
   text-align: left;
@@ -239,5 +259,11 @@ article {
   flex-wrap: wrap;
   justify-content: center;
   gap: 2em;
+}
+
+.cast {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(21em, 1fr));
+  gap: 4em;
 }
 </style>
