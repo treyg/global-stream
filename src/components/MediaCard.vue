@@ -16,6 +16,19 @@
         <p class="release-date" v-if="release_date">
           {{ release_date | cutDate }}
         </p>
+        <div class="details">
+          <div class="runtime_rating">
+            <span
+              ><img src="../assets/clock.svg" alt="" />{{
+                runtime | toHoursAndMinutes
+              }}</span
+            >
+            <span>{{ rating }}</span>
+          </div>
+          <div class="genre_wrapper">
+            <slot name="genre" />
+          </div>
+        </div>
         <h2>
           {{ title }}
         </h2>
@@ -61,6 +74,9 @@ export default {
     //Media Provider Data
     provider: String,
     provider_logo: String,
+    runtime: Number,
+    rating: String,
+    genre: Array,
   },
   methods: {
     saveMedia() {
@@ -98,11 +114,22 @@ export default {
     cutDate(value) {
       return value.slice(0, 4);
     },
+    toHoursAndMinutes(totalMinutes) {
+      const minutes = totalMinutes % 60;
+      const hours = Math.floor(totalMinutes / 60);
+      return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
+      function padTo2Digits(num) {
+        return num.toString().padStart(2);
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.media-card {
+  text-align: left;
+}
 h2 {
   font-size: 4.4em;
   margin-bottom: 0.5em;
@@ -111,7 +138,7 @@ h2 {
 h3 {
   font-size: 3.5em;
   font-style: italic;
-  margin: 0 0 0.2em 0;
+  margin: 0.4em 0 0.8em 0;
 }
 
 p {
@@ -122,6 +149,7 @@ p {
 .release-date {
   font-size: 2.8em;
   margin: 0;
+  text-align: center;
 }
 
 figure {
@@ -145,6 +173,7 @@ figure:hover {
   display: block;
   border-top-right-radius: 0.18em;
   color: var(--text-primary);
+  text-align: center;
 }
 
 .badRating {
@@ -168,6 +197,40 @@ figure:hover {
   display: flex;
   justify-content: center;
   gap: 3em;
+  align-items: center;
+}
+
+.details {
+  font-size: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details span {
+  display: flex;
+}
+
+.runtime_rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.genre_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.details img {
+  width: 1em;
+  display: inline-block;
+  margin-right: 0.3em;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 

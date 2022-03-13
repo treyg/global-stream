@@ -60,6 +60,11 @@ h2 {
   padding: 0;
   width: 100%;
 }
+
+::v-deep .media-card .details img {
+  display: none;
+}
+
 ::v-deep .media-card button,
 ::v-deep .media-card .view-media-btn {
   display: none;
