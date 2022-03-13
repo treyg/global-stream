@@ -6,14 +6,23 @@
       </div>
       <section class="main-content">
         <div class="content-wrapper">
-          <MediaCard
+          <media-card
             :lang="mediaInfo.original_language"
             :tagline="mediaInfo.tagline"
+            :title="mediaInfo.title"
             :summary="mediaInfo.overview"
+            :runtime="mediaInfo.runtime"
+            :rating="getDefaultRating.release_dates[0].certification"
             :vote_average="mediaInfo.vote_average"
             :release_date="mediaInfo.release_date"
             :poster_path="`${poster_base_url}${mediaInfo.poster_path}`"
-          />
+          >
+            <template slot="genre">
+              <span v-for="genre in mediaInfo.genres" :key="genre.id">
+                {{ genre.name }}
+              </span>
+            </template>
+          </media-card>
         </div>
       </section>
       <!-- Stream provider section -->
@@ -86,17 +95,19 @@ export default {
       locations: [],
       placesToWatch: [],
       cast: [],
+      rating: [],
     };
   },
   methods: {
     async populateMediaInfo() {
       const response = await fetch(
-        `${this.STATIC_API}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos,credits`
+        `${this.STATIC_API}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos,credits,release_dates,similar,recommendations`
       );
       const data = await response.json();
       this.locations = data["watch/providers"].results;
       this.mediaInfo = data;
       this.cast = data.credits.cast;
+      this.rating = data.release_dates.results;
 
       // Filter to show only only countries with options to stream
       const streams = Object.entries(this.locations).filter((media) =>
@@ -182,6 +193,12 @@ export default {
     await this.populateMediaInfo();
     this.findProviders();
   },
+  computed: {
+    getDefaultRating: function () {
+      // `this` points to the vm instance
+      return [...this.rating].find((item) => item.iso_3166_1 === "US");
+    },
+  },
 };
 </script>
 <style scoped>
@@ -220,7 +237,7 @@ article {
 
 ::v-deep .media-card h2 {
   font-size: 4.5em;
-  margin-bottom: 0.4em;
+  margin-bottom: 0;
 }
 
 ::v-deep .media-card p {
