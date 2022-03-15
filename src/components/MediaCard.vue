@@ -12,11 +12,11 @@
       </figure>
     </router-link>
     <div>
-      <div>
-        <p class="release-date" v-if="release_date">
-          {{ release_date | cutDate }}
-        </p>
+      <div class="hero-content-wrapper">
         <div class="details">
+          <p class="release-date" v-if="release_date">
+            {{ release_date | cutDate }}
+          </p>
           <div class="runtime_rating">
             <span
               ><img src="../assets/clock.svg" alt="" />{{
@@ -29,21 +29,23 @@
             <slot name="genre" />
           </div>
         </div>
-        <h2>
-          {{ title }}
-        </h2>
-        <h3 v-if="tagline">"{{ tagline }}"</h3>
+        <div class="info-wrapper">
+          <h2>
+            {{ title }}
+          </h2>
+          <h3 v-if="tagline">"{{ tagline }}"</h3>
+          <p v-if="summary">{{ summary }}</p>
+        </div>
       </div>
-      <p v-if="summary">{{ summary }}</p>
-    </div>
-    <div class="button-container">
-      <SaveButton v-on:addToWatchList="saveMedia" />
-      <router-link
-        class="view-media-btn"
-        :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
-      >
-        View
-      </router-link>
+      <div class="button-container">
+        <SaveButton v-on:addToWatchList="saveMedia" />
+        <router-link
+          class="view-media-btn"
+          :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
+        >
+          View
+        </router-link>
+      </div>
     </div>
   </article>
 </template>
@@ -146,8 +148,8 @@ p {
   margin: 0 0 1.5em 0;
 }
 
-.release-date {
-  font-size: 2.8em;
+.details .release-date {
+  font-size: 1em;
   margin: 0;
   text-align: center;
 }
@@ -194,6 +196,7 @@ figure:hover {
 }
 
 .button-container {
+  position: relative;
   display: flex;
   justify-content: center;
   gap: 3em;
@@ -205,6 +208,7 @@ figure:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5em;
 }
 
 .details span {
@@ -248,5 +252,71 @@ figure:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+  .media-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .hero-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  h2 {
+    font-size: 6em !important;
+  }
+
+  h3 {
+  }
+
+  p {
+  }
+
+  .details .release-date {
+  }
+
+  .media-card figure {
+  }
+
+  .votes {
+  }
+
+  .card {
+  }
+
+  .button-container {
+  }
+
+  .button-container button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .details {
+    order: 2;
+    display: flex;
+    align-items: start;
+  }
+
+  .details span {
+  }
+
+  .runtime_rating {
+  }
+
+  .genre_wrapper {
+  }
+
+  .details img {
+  }
+
+  .view-media-btn {
+  }
 }
 </style>

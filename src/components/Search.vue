@@ -97,16 +97,20 @@ input:focus {
 
 /* Adjust mediacard styles for search results */
 ::v-deep .media-card button,
-::v-deep .media-card .view-media-btn {
-  display: none;
-}
-
+::v-deep .media-card .view-media-btn,
 ::v-deep .media-card h2,
-::v-deep .media-card p {
+::v-deep .media-card p,
+::v-deep .media-card .details {
   display: none;
 }
 
 ::v-deep .media-card figure {
   margin: 0;
+}
+
+@media (min-width: 769px) {
+  ::v-deep .media-card {
+    max-width: 32em;
+  }
 }
 </style>

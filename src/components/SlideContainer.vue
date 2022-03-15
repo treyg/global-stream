@@ -54,19 +54,17 @@ h2 {
   margin-left: 0.8em;
 }
 
-/* Hide MediaCard buttons for top-rated movies */
 ::v-deep .media-card figure {
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
-::v-deep .media-card .details img {
-  display: none;
-}
-
+/* Hide MediaCard buttons for top-rated movies */
+::v-deep .media-card .details img,
 ::v-deep .media-card button,
-::v-deep .media-card .view-media-btn {
+::v-deep .media-card .view-media-btn,
+::v-deep .media-card .details {
   display: none;
 }
 

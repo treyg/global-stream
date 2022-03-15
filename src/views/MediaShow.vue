@@ -195,7 +195,7 @@ export default {
   },
   computed: {
     getDefaultRating: function () {
-      // `this` points to the vm instance
+      //Show the first item for the US location
       return [...this.rating].find((item) => item.iso_3166_1 === "US");
     },
   },
@@ -260,6 +260,12 @@ article {
   display: none;
 }
 
+::v-deep .genre_wrapper span {
+  background-color: var(--icon);
+  padding: 0.1em 0.4em;
+  border-radius: 0.2em;
+}
+
 .where-to-watch {
   width: 100%;
   background-color: var(--bg-primary);
@@ -282,5 +288,12 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(21em, 1fr));
   gap: 4em;
+}
+
+/* desktop adjustments */
+@media (min-width: 769px) {
+  .providers {
+    justify-content: start;
+  }
 }
 </style>
