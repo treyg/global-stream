@@ -292,6 +292,10 @@ h2 {
 
 /* desktop adjustments */
 @media (min-width: 769px) {
+  ::v-deep .hero-content-wrapper {
+    margin-left: 7em;
+  }
+
   .providers {
     justify-content: start;
   }

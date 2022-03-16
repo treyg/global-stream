@@ -26,7 +26,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .modal-mask {
   position: fixed;
   z-index: 10;
@@ -64,12 +64,6 @@ export default {
 
 .modal-body {
   margin: 2em 0;
-  text-align: left;
-}
-
-ul {
-  list-style: none;
-  line-height: 1.7;
   text-align: left;
   font-size: 3em;
 }
