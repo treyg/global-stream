@@ -7,6 +7,16 @@
         v-on:keyup.enter="searchFor"
         placeholder="Search for a movie..."
       />
+      <select v-model="searchType">
+        <option
+          class="option"
+          v-for="option in searchTypeOptions"
+          :key="option.id"
+          :value="option.id"
+        >
+          {{ option.name }}
+        </option>
+      </select>
       <button @click="searchFor">Search</button>
     </div>
     <div class="search-results">
@@ -34,14 +44,20 @@ export default {
     return {
       search: "",
       results: [],
-      MAIN_API: "https://api.themoviedb.org/3/search/movie",
+      searchType: "movie",
+      searchTypeOptions: [
+        { id: "movie", name: "Movie" },
+        { id: "tv", name: "TV Show" },
+        { id: "director", name: "Director" },
+      ],
+      MAIN_API: "https://api.themoviedb.org/3/search/",
       STATIC_API: "https://image.tmdb.org/t/p/original/",
     };
   },
   methods: {
     async searchFor() {
       const response = await fetch(
-        `${this.MAIN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&query=${this.search}`
+        `${this.MAIN_API}${this.searchType}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&query=${this.search}`
       );
       const data = await response.json();
       this.results = data.results;
@@ -61,27 +77,47 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1em;
   padding: 0 3rem;
   margin: 0 auto;
   max-width: 78em;
 }
 
-input {
+input,
+select {
   border-radius: 0.3em;
-  height: 5.5rem;
   border: 0.1em solid var(--primary);
   background-color: var(--bg-secondary);
   color: var(--text-primary);
+}
+
+input {
+  height: 5.5rem;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   text-indent: 0.5em;
   width: 100%;
+}
+
+select {
+  height: 6.35rem;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 2.5rem;
+  margin-right: 0.5em;
+}
+
+.option {
+  font-size: 2.5rem;
 }
 
 ::placeholder {
   font-size: 2.4rem;
 }
 
-input:focus {
+input:focus,
+input:focus + select {
   outline: none;
   box-shadow: 0 0 0.5em rgba(104, 207, 248, 0.644);
 }

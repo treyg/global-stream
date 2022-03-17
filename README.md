@@ -12,9 +12,9 @@ Built with Vue, Node and Express.
 - [x] Build components to show cast on movie pages
 - [x] Add route transitions
 - [ ] Create 'show more' button for search results
-- [ ] Add select option for which countries' popular movies show on homepage
+- [ ] Add search option for director/actor
+- [x] Add select option for which countries' popular movies show on homepage
 - [ ] Make API fetch methods reusable/cleanup repeated code
 - [ ] Add TV filter option for search
-- [ ] Add authenication so any user can connect Notion account
 - [x] Style globally.
-- [ ] Style for desktop.
+- [x] Style for desktop.

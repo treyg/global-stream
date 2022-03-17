@@ -12,9 +12,9 @@
                 <!-- Header Navigation Menu Icons -->
                 <button
                   class="header--button"
-                  v-if="show"
+                  v-if="showNav"
                   key="on"
-                  @click="show = false"
+                  @click="showNav = false"
                 >
                   <svg viewBox="0 0 24 24" class="header--icon">
                     <title>Close</title>
@@ -29,7 +29,7 @@
                   class="header--button"
                   v-else
                   key="off"
-                  @click="show = true"
+                  @click="showNav = true"
                 >
                   <svg viewBox="0 0 24 24" class="header--icon">
                     <title>Navigation Menu</title>
@@ -45,8 +45,8 @@
             <transition name="dropdown">
               <div
                 class="dropdown__menu"
-                v-bind:class="{ active: show }"
-                v-if="show"
+                v-bind:class="{ active: showNav }"
+                v-if="showNav"
               >
                 <ul class="dropdown__menu-nav">
                   <li class="dropdown__menu-item">
@@ -84,8 +84,24 @@ export default {
   name: "App",
   data() {
     return {
-      show: false,
+      showNav: false,
     };
+  },
+  methods: {},
+  mounted() {
+    //Close nav when clicking outside of nav if open
+    document.addEventListener("click", (e) => {
+      if (this.showNav) {
+        if (!e.target.closest(".header__nav")) {
+          this.showNav = false;
+        }
+      }
+    });
+  },
+  watch: {
+    $route() {
+      this.showNav = false;
+    },
   },
 };
 </script>
@@ -95,12 +111,13 @@ export default {
   font-size: 1.3vw;
   --bg-primary: #263238;
   --bg-secondary: #37474f;
+  --darkest: #11191f;
   --primary: #3ccafa;
   --primary-lighter: #3d7082;
   --success: #03beac;
   --warning: #ffc107;
   --danger: #ec356c;
-  --text-primary: #fbfcfd;
+  --text-primary: #ffffff;
   --icon: #617b8a;
 }
 
@@ -113,25 +130,6 @@ export default {
   background-color: var(--bg-primary);
   min-height: 100vh;
 }
-
-/* nav {
-  height: 3em;
-  background-color: var(--bg-secondary);
-  font-size: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-nav a {
-  font-weight: bold;
-  color: var(--text-primary);
-  font-size: 1.5em;
-}
-
-nav a.router-link-exact-active {
-  color: var(--success);
-} */
 
 img {
   border-radius: 0.8em;
@@ -195,10 +193,10 @@ ul {
   }
 }
 
-/* Sidebar styling */
+/* Nav styling */
 .header {
   padding: 2rem 5rem 2rem 5rem;
-  background-color: #11191f;
+  background-color: var(--darkest);
 }
 .header ul {
   list-style: none;
@@ -235,16 +233,19 @@ ul {
   top: 100%;
   right: 0;
   position: absolute;
-  z-index: 10;
+  z-index: 2;
   height: auto;
   min-width: 64.4rem;
-  margin-top: 1rem;
+  margin-top: 1.7rem;
   overflow-y: auto;
   padding: 2rem 1rem 2rem 0rem;
-  border-radius: 12px;
+  border-radius: 0.8rem;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
   background-color: var(--bg-primary);
-  border: 0.1rem solid var(--bg-secondary);
+  border: 0.4rem solid var(--darkest);
   background-clip: padding-box;
+  box-shadow: 5px 20px 20px -20px var(--darkest);
 }
 .dropdown__menu-nav {
   padding-left: 0;
@@ -263,8 +264,7 @@ ul {
   width: 88%;
 }
 .dropdown__menu-link:hover {
-  color: var(--success);
-  background-color: rgba(102, 214, 164, 0.1);
+  background-color: var(--primary);
 }
 .dropdown__menu-svg {
   width: 1.5rem;
@@ -277,26 +277,26 @@ ul {
 }
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.6s;
+  transition: all 0.25s;
 }
 .slide-fade-enter,
 .slide-fade-leave-active {
   opacity: 0;
 }
 .slide-fade-enter {
-  transform: translateX(31px);
+  transform: translateX(3.1rem);
 }
 .slide-fade-leave-active {
-  transform: translateX(-31px);
+  transform: translateX(-3.1rem);
 }
 .dropdown-enter-active,
 .dropdown-leave-active {
-  transition: all 1s;
+  transition: all 0.25s;
 }
 .dropdown-enter,
 .dropdown-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(3rem);
 }
 .main {
   margin: 6rem;
