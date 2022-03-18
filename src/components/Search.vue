@@ -1,11 +1,12 @@
 <template>
+  <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
   <section class="section">
     <div class="search-container">
       <input
         type="text"
         v-model="search"
         v-on:keyup.enter="searchFor"
-        placeholder="Search for a movie..."
+        placeholder="Search for a..."
       />
       <select v-model="searchType">
         <option
@@ -22,6 +23,7 @@
     <div class="search-results">
       <MediaCard
         v-for="result in results"
+        v-if="result.poster_path"
         :key="result.id"
         :id="result.id"
         :lang="result.original_language"

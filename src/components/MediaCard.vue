@@ -119,7 +119,7 @@ export default {
     toHoursAndMinutes(totalMinutes) {
       const minutes = totalMinutes % 60;
       const hours = Math.floor(totalMinutes / 60);
-      return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
+      return `${padTo2Digits(hours)}h${padTo2Digits(minutes)}m`;
       function padTo2Digits(num) {
         return num.toString().padStart(2);
       }

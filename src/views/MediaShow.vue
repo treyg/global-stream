@@ -260,10 +260,17 @@ article {
   display: none;
 }
 
+/* Container for genres */
 ::v-deep .genre_wrapper span {
   background-color: var(--icon);
   padding: 0.1em 0.4em;
   border-radius: 0.2em;
+}
+
+/* Style local modal list */
+::v-deep .modal-mask ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
 }
 
 .where-to-watch {

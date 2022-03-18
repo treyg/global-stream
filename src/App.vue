@@ -193,6 +193,11 @@ ul {
   }
 }
 
+@media (min-width: 1921px) {
+  :root {
+    font-size: 10px;
+  }
+}
 /* Nav styling */
 .header {
   padding: 2rem 5rem 2rem 5rem;

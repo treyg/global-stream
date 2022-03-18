@@ -63,7 +63,7 @@ export default {
 }
 
 .modal-body {
-  margin: 2em 0;
+  margin: 2em;
   text-align: left;
   font-size: 3em;
 }
