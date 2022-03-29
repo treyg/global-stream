@@ -33,14 +33,23 @@
         :release_date="result.release_date"
         :poster_path="`${STATIC_API}${result.poster_path}`"
       />
+      <PersonCard
+        v-if="person.profile_path"
+        v-for="person in results"
+        :key="person.id"
+        :name="person.name"
+        :id="person.id"
+        :img_path="`${STATIC_API}${person.profile_path}`"
+      />
     </div>
   </section>
 </template>
 
 <script>
 import MediaCard from "./MediaCard.vue";
+import PersonCard from "./PersonCard.vue";
 export default {
-  components: { MediaCard },
+  components: { MediaCard, PersonCard },
   name: "Search",
   data() {
     return {
@@ -50,7 +59,7 @@ export default {
       searchTypeOptions: [
         { id: "movie", name: "Movie" },
         { id: "tv", name: "TV Show" },
-        { id: "director", name: "Director" },
+        { id: "person", name: "Person" },
       ],
       MAIN_API: "https://api.themoviedb.org/3/search/",
       STATIC_API: "https://image.tmdb.org/t/p/original/",
@@ -63,7 +72,9 @@ export default {
       );
       const data = await response.json();
       this.results = data.results;
-      this.sortByRating();
+      if (this.searchType !== "person") {
+        this.sortByRating();
+      }
     },
     sortByRating() {
       this.results.sort((a, b) => {
@@ -82,18 +93,20 @@ export default {
   padding: 0 3rem;
   margin: 0 auto;
   max-width: 78em;
+  height: 6em;
 }
 
 input,
 select {
   border-radius: 0.3em;
-  border: 0.1em solid var(--primary);
+  border: 0.1rem solid var(--primary);
   background-color: var(--bg-secondary);
   color: var(--text-primary);
+  height: 100%;
+  box-sizing: border-box;
 }
 
 input {
-  height: 5.5rem;
   border-right: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -102,7 +115,6 @@ input {
 }
 
 select {
-  height: 6.35rem;
   border-left: none;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -128,7 +140,7 @@ input:focus + select {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   max-width: 90%;
-  margin: auto;
+  margin: 5em auto;
   gap: 4em;
   padding-bottom: 10em;
 }
