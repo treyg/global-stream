@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import About from "../views/About.vue";
 import Home from "../views/Home.vue";
 import MediaShow from "../views/MediaShow.vue";
+import PersonShow from "../views/PersonShow.vue";
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,7 @@ const routes = [
     component: About,
   },
   { path: "/media/:id", name: "MediaShow", component: MediaShow },
+  { path: "/person/:id", name: "PersonShow", component: PersonShow },
 ];
 
 const router = new VueRouter({
