@@ -45,12 +45,13 @@
         <div class="content-wrapper">
           <h2>Cast</h2>
           <div class="cast">
-            <CastCard
+            <PersonCard
               v-for="person in cast.slice(0, 9)"
-              :key="person.d"
+              :key="person.id"
               :name="person.name"
               :character="person.character"
               :img_path="`${poster_base_url}${person.profile_path}`"
+              :id="person.id"
             />
           </div>
         </div>
@@ -76,11 +77,11 @@
 <script>
 import WatchProviders from "@/components/WatchProviders.vue";
 import MediaCard from "@/components/MediaCard.vue";
-import CastCard from "@/components/CastCard.vue";
+import PersonCard from "@/components/PersonCard.vue";
 import LocationModal from "../components/LocationModal.vue";
 export default {
   name: "MediaShow",
-  components: { WatchProviders, MediaCard, CastCard, LocationModal },
+  components: { WatchProviders, MediaCard, PersonCard, LocationModal },
   data() {
     return {
       showModal: false,
