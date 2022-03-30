@@ -1,19 +1,50 @@
 <template>
-  <div>
-    <PersonCard
-      :key="person.id"
-      :name="person.name"
-      :img_path="`${img_base_url}${person.profile_path}`"
-      :bio="person.biography"
-    />
-  </div>
+  <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
+  <section class="main-content">
+    <div class="content-wrapper">
+      <div class="col-sm">
+        <PersonCard
+          :key="person.id"
+          :name="person.name"
+          :img_path="`${img_base_url}${person.profile_path}`"
+        />
+        <h3 v-if="person.birthday">Birthday</h3>
+        <p v-if="person.birthday">{{ person.birthday }}</p>
+        <h3 v-if="person.place_of_birth">Born In</h3>
+        <p v-if="person.place_of_birth">{{ person.place_of_birth }}</p>
+        <h3 v-if="person.deathday">Died</h3>
+        <p v-if="person.deathday">{{ person.deathday }}</p>
+      </div>
+      <div class="col-lg">
+        <h3 v-if="person.biography">Biography</h3>
+        <p>{{ person.biography }}</p>
+        <div class="credit-wrapper">
+          <h3>Credits</h3>
+          <div class="credit-container">
+            <MediaCard
+              v-for="credit in person.combined_credits.cast"
+              v-if="credit.poster_path"
+              :key="credit.id"
+              :id="credit.id"
+              :lang="credit.original_language"
+              :title="credit.title"
+              :type="credit.media_type"
+              :vote_average="credit.vote_average"
+              :poster_path="`${img_base_url}${credit.poster_path}`"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
 import PersonCard from "../components/PersonCard.vue";
+import MediaCard from "../components/MediaCard.vue";
 export default {
   name: "PersonShow",
-  components: { PersonCard },
+  components: { PersonCard, MediaCard },
   data() {
     return {
       personID: this.$route.params.id,
@@ -27,7 +58,7 @@ export default {
     async fetchPersonInfo() {
       console.log(this.personID);
       const response = await fetch(
-        `${this.STATIC_API}/${this.personID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}`
+        `${this.STATIC_API}/${this.personID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&append_to_response=combined_credits`
       );
       const data = await response.json();
       this.person = data;
@@ -40,4 +71,66 @@ export default {
 </script>
 
 <style scoped>
+.main-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.content-wrapper {
+  max-width: 93%;
+  margin: auto;
+  padding-top: 6em;
+  text-align: left;
+}
+
+h3 {
+  font-size: 3.9em;
+  margin: 1.2em auto 0.6em;
+}
+
+p {
+  font-size: 2.6em;
+  margin: 0;
+}
+
+.credit-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(21em, 1fr));
+  gap: 4em;
+}
+/* Styling for person card component */
+::v-deep .person-card a {
+  pointer-events: none;
+  cursor: default;
+}
+
+::v-deep .person-card figure {
+  width: 60em;
+  margin: auto;
+}
+
+::v-deep .person-card h4 {
+  font-size: 6em;
+  text-align: center;
+}
+
+/* Hide media card elements */
+::v-deep .media-card .hero-content-wrapper,
+::v-deep .media-card .button-container {
+  display: none;
+}
+
+::v-deep .media-card {
+  padding: 0;
+}
+
+::v-deep .media-card figure {
+  width: 100%;
+  margin: 0;
+}
 </style>

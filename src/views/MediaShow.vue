@@ -236,6 +236,11 @@ article {
   margin: 0;
 }
 
+::v-deep .media-card a {
+  pointer-events: none;
+  cursor: default;
+}
+
 ::v-deep .media-card h2 {
   font-size: 4.5em;
   margin-bottom: 0;
