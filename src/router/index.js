@@ -5,6 +5,7 @@ import Home from "../views/Home.vue";
 import MediaShow from "../views/MediaShow.vue";
 import PersonShow from "../views/PersonShow.vue";
 
+
 Vue.use(VueRouter);
 
 const routes = [

@@ -134,6 +134,10 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  padding-bottom: 9rem;
+}
+
 .hero {
   height: 100%;
   background-image: linear-gradient(
