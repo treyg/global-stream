@@ -21,7 +21,7 @@
         </router-link>
       </li>
       <li>
-        <button @click="$emit('inputFocus')" aria-label="Search." to="/search">
+        <button @click="focusSearch" aria-label="Search.">
           <img class="sm-only" src="../assets/search.svg" /><span
             class="lg-only"
             >Search</span
@@ -43,6 +43,14 @@
 <script>
 export default {
   name: "Nav",
+  data() {
+    return {};
+  },
+  methods: {
+    focusSearch() {
+      this.$router.push({ path: "/", hash: "#search" });
+    },
+  },
 };
 </script>
 

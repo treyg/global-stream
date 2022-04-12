@@ -3,6 +3,7 @@
   <section class="section">
     <div class="search-container">
       <input
+        id="searchInput"
         type="text"
         v-model="search"
         v-on:keyup.enter="searchFor"

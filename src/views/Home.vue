@@ -78,6 +78,7 @@ export default {
     };
   },
   mounted: function () {
+    this.checkSearchHash();
     this.getPopular();
     this.getTopRated();
   },
@@ -95,6 +96,11 @@ export default {
       );
       const data = await response.json();
       this.topRatedMovies = data.results;
+    },
+    checkSearchHash() {
+      if (this.$route.hash === "#search") {
+        document.querySelector("#searchInput").focus();
+      }
     },
   },
 };
