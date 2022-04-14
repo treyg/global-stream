@@ -12,7 +12,7 @@
             :title="mediaInfo.title"
             :summary="mediaInfo.overview"
             :runtime="mediaInfo.runtime"
-            :rating="getDefaultRating.release_dates[0].certification"
+            :rating="getDefaultRating"
             :vote_average="mediaInfo.vote_average"
             :release_date="mediaInfo.release_date"
             :poster_path="`${poster_base_url}${mediaInfo.poster_path}`"
@@ -197,7 +197,12 @@ export default {
   computed: {
     getDefaultRating: function () {
       //Show the first item for the US location
-      return [...this.rating].find((item) => item.iso_3166_1 === "US");
+      if ([...this.rating].find((item) => item.iso_3166_1 === "US")) {
+        return [...this.rating].find((item) => item.iso_3166_1 === "US")
+          .release_dates[0].certification;
+      } else {
+        return null;
+      }
     },
   },
 };
