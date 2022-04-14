@@ -170,7 +170,7 @@ figure:hover {
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 2.5em;
+  font-size: 2.2em;
   width: 3.5em;
   display: block;
   border-top-right-radius: 0.18em;

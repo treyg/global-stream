@@ -197,12 +197,9 @@ export default {
   computed: {
     getDefaultRating: function () {
       //Show the first item for the US location
-      if ([...this.rating].find((item) => item.iso_3166_1 === "US")) {
-        return [...this.rating].find((item) => item.iso_3166_1 === "US")
-          .release_dates[0].certification;
-      } else {
-        return null;
-      }
+      const firstUS = [...this.rating].find((item) => item.iso_3166_1 === "US");
+      if (!firstUS) return null;
+      return firstUS.release_dates[0].certification;
     },
   },
 };

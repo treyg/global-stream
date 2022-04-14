@@ -83,6 +83,7 @@ export default {
   width: auto;
   height: auto;
   background: none;
+  cursor: pointer;
 }
 
 #nav-list img {

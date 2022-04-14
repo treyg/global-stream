@@ -43,6 +43,101 @@
           :poster_path="`${base_url}${movie.poster_path}`"
         /> </template
     ></slide-container>
+    <!-- Slide container component for Popular Action -->
+    <slide-container
+      :type="popularAction"
+      :selectedRegion="selectedRegionAction"
+      :regions="regions"
+      v-model="selectedRegionAction"
+      v-on:fetchNewParam="getPopAction"
+      ><template v-slot:media>
+        <MediaCard
+          class="type-card"
+          v-for="movie in popAction"
+          :key="movie.id"
+          :id="movie.id"
+          :lang="movie.original_language"
+          :type="movie.movie"
+          :vote_average="movie.vote_average"
+          :poster_path="`${base_url}${movie.poster_path}`"
+        /> </template
+    ></slide-container>
+    <!-- Slide container component for Popular Comedy -->
+    <slide-container
+      :type="popularComedy"
+      :selectedRegion="selectedRegionComedy"
+      :regions="regions"
+      v-model="selectedRegionComedy"
+      v-on:fetchNewParam="getPopComedy"
+      ><template v-slot:media>
+        <MediaCard
+          class="type-card"
+          v-for="movie in popComedy"
+          :key="movie.id"
+          :id="movie.id"
+          :lang="movie.original_language"
+          :type="movie.movie"
+          :vote_average="movie.vote_average"
+          :poster_path="`${base_url}${movie.poster_path}`"
+        /> </template
+    ></slide-container>
+    <!-- Slide container component for Popular Documentaries -->
+    <slide-container
+      :type="popularDoc"
+      :selectedRegion="selectedRegionDoc"
+      :regions="regions"
+      v-model="selectedRegionDoc"
+      v-on:fetchNewParam="getPopDoc"
+      ><template v-slot:media>
+        <MediaCard
+          class="type-card"
+          v-for="movie in popDoc"
+          :key="movie.id"
+          :id="movie.id"
+          :lang="movie.original_language"
+          :type="movie.movie"
+          :vote_average="movie.vote_average"
+          :poster_path="`${base_url}${movie.poster_path}`"
+        /> </template
+    ></slide-container>
+    <!-- Slide container component for Popular Drama -->
+    <slide-container
+      :type="popularDrama"
+      :selectedRegion="selectedRegionDrama"
+      :regions="regions"
+      v-model="selectedRegionDrama"
+      v-on:fetchNewParam="getPopDrama"
+      ><template v-slot:media>
+        <MediaCard
+          class="type-card"
+          v-for="movie in popDrama"
+          :key="movie.id"
+          :id="movie.id"
+          :lang="movie.original_language"
+          :type="movie.movie"
+          :vote_average="movie.vote_average"
+          :poster_path="`${base_url}${movie.poster_path}`"
+        /> </template
+    ></slide-container>
+    <!-- Slide container component for Popular Drama -->
+    <slide-container
+      :type="popularHistory"
+      :selectedRegion="selectedRegionHistory"
+      :regions="regions"
+      v-model="selectedRegionHistory"
+      v-on:fetchNewParam="getPopHistory"
+      ><template v-slot:media>
+        <MediaCard
+          class="type-card"
+          v-for="movie in popHistory"
+          :key="movie.id"
+          :id="movie.id"
+          :lang="movie.original_language"
+          :type="movie.movie"
+          :vote_average="movie.vote_average"
+          :poster_path="`${base_url}${movie.poster_path}`"
+        /> </template
+    ></slide-container>
     <!-- Slide container component for Trending -->
     <h2>People Trending Globally</h2>
     <slide-container :type="trendingAll"
@@ -79,15 +174,30 @@ export default {
       regions: regionData,
       selectedRegionTop: "US",
       selectedRegionPopular: "US",
+      selectedRegionAction: "US",
+      selectedRegionComedy: "US",
+      selectedRegionDrama: "US",
+      selectedRegionDoc: "US",
+      selectedRegionHistory: "US",
       topRated: "Top Rated",
       popular: "Popular",
+      popularAction: "Popular Action",
+      popularComedy: "Popular Comedy",
+      popularDrama: "Popular Drama",
+      popularDoc: "Popular Documentaries",
+      popularHistory: "Popular History",
       trendingAll: "People Trending Globally",
       sort_by: "popularity.desc",
       base_url: "https://image.tmdb.org/t/p/w500/",
       STATIC_TOP_API: "https://api.themoviedb.org/3/movie/top_rated",
-      STATIC_POP_API: "https://api.themoviedb.org/3/discover/movie",
+      STATIC_GEN_API: "https://api.themoviedb.org/3/discover/movie",
       topRatedMovies: [],
       popularMovies: [],
+      popAction: [],
+      popComedy: [],
+      popDrama: [],
+      popDoc: [],
+      popHistory: [],
       trendingPeople: [],
       page: 1,
       include_adult: false,
@@ -98,12 +208,17 @@ export default {
     this.checkSearchHash();
     this.getPopular();
     this.getTopRated();
+    this.getPopAction();
+    this.getPopComedy();
+    this.getPopDrama();
+    this.getPopDoc();
+    this.getPopHistory();
     this.getTrendingPeople();
   },
   methods: {
     async getPopular() {
       const response = await fetch(
-        `${this.STATIC_POP_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&language=${this.lang}&region=${this.selectedRegionPopular}&page=${this.page}`
+        `${this.STATIC_GEN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&sort_by=${this.sort_by}&include_adult=${this.include_adult}&include_video=${this.include_video}&language=${this.lang}&region=${this.selectedRegionPopular}&page=${this.page}`
       );
       const data = await response.json();
       this.popularMovies = data.results;
@@ -114,6 +229,41 @@ export default {
       );
       const data = await response.json();
       this.topRatedMovies = data.results;
+    },
+    async getPopAction() {
+      const response = await fetch(
+        `${this.STATIC_TOP_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&region=${this.selectedRegionAction}&with_genres=28`
+      );
+      const data = await response.json();
+      this.popAction = data.results;
+    },
+    async getPopComedy() {
+      const response = await fetch(
+        `${this.STATIC_GEN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&region=${this.selectedRegionAction}&with_genres=35`
+      );
+      const data = await response.json();
+      this.popComedy = data.results;
+    },
+    async getPopDrama() {
+      const response = await fetch(
+        `${this.STATIC_GEN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&region=${this.selectedRegionDrama}&with_genres=18`
+      );
+      const data = await response.json();
+      this.popDrama = data.results;
+    },
+    async getPopDoc() {
+      const response = await fetch(
+        `${this.STATIC_GEN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&region=${this.selectedRegionDoc}&with_genres=99`
+      );
+      const data = await response.json();
+      this.popDoc = data.results;
+    },
+    async getPopHistory() {
+      const response = await fetch(
+        `${this.STATIC_GEN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&region=${this.selectedRegionHistory}&with_genres=36`
+      );
+      const data = await response.json();
+      this.popHistory = data.results;
     },
     async getTrendingPeople() {
       const response = await fetch(
@@ -184,7 +334,7 @@ h2 {
   }
 }
 
-/* Set how many horizontal cards to show on smaller screens */
+/* Set how many horizontal cards to show on each screen size */
 @media (max-width: 768px) {
   .type-card {
     width: calc((100% - (24px)) / 2.2);
@@ -193,6 +343,16 @@ h2 {
 @media (min-width: 769px) {
   .type-card {
     width: calc((100% - (24px)) / 7);
+  }
+}
+@media (min-width: 1200px) {
+  .type-card {
+    width: calc((100% - (24px)) / 9);
+  }
+}
+@media (min-width: 2000px) {
+  .type-card {
+    width: calc((100% - (24px)) / 12);
   }
 }
 </style>
