@@ -43,6 +43,19 @@
           :poster_path="`${base_url}${movie.poster_path}`"
         /> </template
     ></slide-container>
+    <!-- Slide container component for Trending -->
+    <h2>People Trending Globally</h2>
+    <slide-container :type="trendingAll"
+      ><template v-slot:media>
+        <PersonCard
+          class="type-card"
+          v-for="person in trendingPeople"
+          :key="person.id"
+          :id="person.id"
+          :name="person.name"
+          :img_path="`${base_url}${person.profile_path}`"
+        /> </template
+    ></slide-container>
   </div>
 </template>
 <script>
@@ -50,6 +63,7 @@ import Search from "../components/Search.vue";
 import Waves from "../components/Waves.vue";
 import SlideContainer from "../components/SlideContainer.vue";
 import MediaCard from "../components/MediaCard.vue";
+import PersonCard from "../components/PersonCard.vue";
 import regionData from "../region_data.json";
 export default {
   name: "Home",
@@ -58,6 +72,7 @@ export default {
     Waves,
     SlideContainer,
     MediaCard,
+    PersonCard,
   },
   data() {
     return {
@@ -66,12 +81,14 @@ export default {
       selectedRegionPopular: "US",
       topRated: "Top Rated",
       popular: "Popular",
+      trendingAll: "People Trending Globally",
       sort_by: "popularity.desc",
       base_url: "https://image.tmdb.org/t/p/w500/",
       STATIC_TOP_API: "https://api.themoviedb.org/3/movie/top_rated",
       STATIC_POP_API: "https://api.themoviedb.org/3/discover/movie",
       topRatedMovies: [],
       popularMovies: [],
+      trendingPeople: [],
       page: 1,
       include_adult: false,
       include_video: false,
@@ -81,6 +98,7 @@ export default {
     this.checkSearchHash();
     this.getPopular();
     this.getTopRated();
+    this.getTrendingPeople();
   },
   methods: {
     async getPopular() {
@@ -96,6 +114,13 @@ export default {
       );
       const data = await response.json();
       this.topRatedMovies = data.results;
+    },
+    async getTrendingPeople() {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/trending/person/week?api_key=${process.env.VUE_APP_TMDB_API_KEY}`
+      );
+      const data = await response.json();
+      this.trendingPeople = data.results;
     },
     checkSearchHash() {
       if (this.$route.hash === "#search") {
@@ -146,6 +171,13 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
+h2 {
+  font-size: 5.5em;
+  margin-bottom: 0;
+  text-align: left;
+  margin-left: 0.8em;
+  margin-bottom: 1.1em;
+}
 @media (min-width: 769px) {
   h1 {
     font-size: 10em;

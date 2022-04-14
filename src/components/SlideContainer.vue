@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h2>
+    <h2 v-if="regions">
       {{ type }} in
       <select
+        v-if="regions"
         :value="value"
         @input="$emit('input', $event.target.value)"
         @change="$emit('fetchNewParam')"
