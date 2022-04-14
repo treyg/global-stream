@@ -52,6 +52,10 @@ figure {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 h4 {
   font-size: 3em;
   margin: 0.5em 0 0.2em 0;

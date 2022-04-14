@@ -126,4 +126,10 @@ ul {
   bottom: 0;
   z-index: 1;
 }
+
+@media (min-width: 768px) {
+  .header {
+    position: relative;
+  }
+}
 </style>
