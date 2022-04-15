@@ -2,7 +2,10 @@
   <article class="media-card">
     <router-link
       class="image-link"
-      :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
+      :to="{
+        name: 'MediaShow',
+        params: { mediaType: mediaType, id: id, lang: lang },
+      }"
     >
       <figure>
         <img :src="poster_path" alt="" />
@@ -38,13 +41,14 @@
         </div>
       </div>
       <div class="button-container">
-        <SaveButton v-on:addToWatchList="saveMedia" />
-        <router-link
+        <SaveButton id="saveBtn" v-on:addToWatchList="saveMedia" />
+        <!-- <router-link
+          v-if="id"
           class="view-media-btn"
           :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
         >
           View
-        </router-link>
+        </router-link> -->
       </div>
     </div>
   </article>
@@ -63,13 +67,16 @@ export default {
       type: [String, Number],
     },
     release_date: String,
+    mediaType: {
+      type: String,
+      default: "movie",
+    },
     poster_path: String,
     summary: String,
     tagline: String,
     link: String,
     lang: String,
     url: String,
-    type: String,
     onList: Boolean,
     media: {},
     id: Number,
@@ -80,6 +87,12 @@ export default {
     rating: String,
     genre: Array,
   },
+  data() {
+    return {};
+  },
+  mounted() {
+    // this.checkOnList();
+  },
   methods: {
     saveMedia() {
       //function to push prop data to watchlist
@@ -88,17 +101,17 @@ export default {
           title: this.title,
           summary: this.summary,
           url: this.url,
-          type: this.type,
+          type: this.mediaType,
         })
         .then(function (response) {
           console.log(response);
+          const saveBtn = document.getElementById("saveBtn");
+          saveBtn.classList.add("saved");
+          saveBtn.innerHTML = "Saved";
         })
         .catch(function (error) {
           console.log(error);
         });
-    },
-    showLang() {
-      console.log(this.lang);
     },
   },
   computed: {
@@ -132,6 +145,23 @@ export default {
 .media-card {
   text-align: left;
 }
+.saved {
+  background-color: var(--success);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.saved::after {
+  content: "\2713";
+  position: absolute;
+  top: 50%;
+  right: 11%;
+  height: auto;
+  width: auto;
+  transform: translateY(-50%);
+  font-size: 1.1em;
+}
+
 h2 {
   font-size: 4.4em;
   margin-bottom: 0.5em;

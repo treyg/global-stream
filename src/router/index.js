@@ -19,7 +19,7 @@ const routes = [
     name: "About",
     component: About,
   },
-  { path: "/media/:id", name: "MediaShow", component: MediaShow },
+  { path: "/:mediaType/:id/lang=:lang/", name: "MediaShow", component: MediaShow },
   { path: "/person/:id", name: "PersonShow", component: PersonShow },
 ];
 

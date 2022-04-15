@@ -88,9 +88,10 @@ export default {
       mediaInfo: [],
       mediaID: this.$route.params.id,
       lang: this.$route.params.lang,
+      mediaType: null,
       backdrop_base_url: "https://image.tmdb.org/t/p/original",
       poster_base_url: "https://image.tmdb.org/t/p/w500",
-      STATIC_API: "https://api.themoviedb.org/3/movie",
+      STATIC_API: "https://api.themoviedb.org/3/",
       //
       watchProviders: [],
       locations: [],
@@ -102,7 +103,7 @@ export default {
   methods: {
     async populateMediaInfo() {
       const response = await fetch(
-        `${this.STATIC_API}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos,credits,release_dates,similar,recommendations`
+        `${this.STATIC_API}/${this.mediaType}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos,credits,release_dates,similar,recommendations`
       );
       const data = await response.json();
       this.locations = data["watch/providers"].results;
@@ -181,6 +182,13 @@ export default {
       });
       this.showModal = true;
     },
+    checkMediaType() {
+      if (this.$route.params.mediaType === undefined) {
+        this.mediaType = "movie";
+      } else {
+        this.mediaType = this.$route.params.mediaType;
+      }
+    },
   },
   filters: {
     fullCountryName(country) {
@@ -193,6 +201,9 @@ export default {
   mounted: async function () {
     await this.populateMediaInfo();
     this.findProviders();
+  },
+  beforeMount() {
+    this.checkMediaType();
   },
   computed: {
     getDefaultRating: function () {

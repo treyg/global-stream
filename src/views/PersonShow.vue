@@ -22,9 +22,9 @@
           <h3>Credits</h3>
           <div class="credit-container">
             <MediaCard
-              v-for="credit in person.combined_credits.cast"
+              v-for="credit in combined_credits"
               v-if="credit.poster_path"
-              :key="credit.id"
+              :key="credit.credit_id"
               :id="credit.id"
               :lang="credit.original_language"
               :title="credit.title"
@@ -51,17 +51,18 @@ export default {
       img_base_url: "https://image.tmdb.org/t/p/w500",
       STATIC_API: "https://api.themoviedb.org/3/person",
       person: [],
+      combined_credits: [],
     };
   },
   methods: {
     //fetch person info
     async fetchPersonInfo() {
-      console.log(this.personID);
       const response = await fetch(
         `${this.STATIC_API}/${this.personID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&append_to_response=combined_credits`
       );
       const data = await response.json();
       this.person = data;
+      this.combined_credits = data.combined_credits.cast;
     },
   },
   created: async function () {

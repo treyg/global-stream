@@ -29,7 +29,7 @@
         :id="result.id"
         :lang="result.original_language"
         :title="result.title"
-        :type="result.movie"
+        :mediaType="result.media_type"
         :vote_average="result.vote_average"
         :release_date="result.release_date"
         :poster_path="`${STATIC_API}${result.poster_path}`"
@@ -62,17 +62,22 @@ export default {
         { id: "tv", name: "TV Show" },
         { id: "person", name: "Person" },
       ],
-      MAIN_API: "https://api.themoviedb.org/3/search/",
+      MAIN_API: "https://api.themoviedb.org/3/search/multi",
       STATIC_API: "https://image.tmdb.org/t/p/original/",
     };
   },
   methods: {
     async searchFor() {
       const response = await fetch(
-        `${this.MAIN_API}${this.searchType}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&query=${this.search}`
+        `${this.MAIN_API}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&query=${this.search}`
       );
       const data = await response.json();
-      this.results = data.results;
+      const fullData = data.results;
+      //filter fullData by searchType id
+      this.results = fullData.filter(
+        (result) => result.media_type === this.searchType
+      );
+
       if (this.searchType !== "person") {
         this.sortByRating();
       }

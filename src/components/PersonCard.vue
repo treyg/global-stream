@@ -3,7 +3,8 @@
     <article>
       <router-link :to="{ name: 'PersonShow', params: { id: id } }">
         <figure>
-          <img :src="img_path" alt="" />
+          <img v-if="img_path" :src="img_path" alt="" />
+          <img v-else src="https://via.placeholder.com/150" alt="" />
           <figcaption>
             <h4>{{ name }}</h4>
             <h5>{{ character }}</h5>
@@ -20,14 +21,12 @@ export default {
   props: {
     name: {
       type: String,
-      required: true,
     },
     character: {
       type: String,
     },
     img_path: {
       type: String,
-      required: true,
     },
     id: {
       type: Number,
