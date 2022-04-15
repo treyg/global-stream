@@ -1,4 +1,5 @@
 import { Client } from "@notionhq/client";
+//import { get } from "core-js/core/dict";
 
 const notion = new Client({
   auth: process.env.NOTION_INTEGRATION_TOKEN,
@@ -6,27 +7,35 @@ const notion = new Client({
 });
 
 //function to get types for show/movie
-async function getTypes() {
-  const database = await notion.databases.retrieve({
+// async function getTypes() {
+//   const database = await notion.databases.retrieve({
+//     database_id: process.env.NOTION_DATABASE_ID,
+//   });
+//   return notionPropertiesById(database.properties)[
+//     process.env.NOTION_TYPES
+//   ].multi_select.options.map((option) => {
+//     return { id: option.id, name: option.name };
+//   });
+// }
+
+// // function to get properties for type
+// function notionPropertiesById(properties) {
+//   return Object.values(properties).reduce((obj, property) => {
+//     const { id, ...rest } = property;
+//     return { ...obj, [id]: rest };
+//   }, {});
+// }
+
+async function getDatabase() {
+  const response = await notion.databases.retrieve({
     database_id: process.env.NOTION_DATABASE_ID,
   });
-  return notionPropertiesById(database.properties)[
-    process.env.NOTION_TYPES
-  ].multi_select.options.map((option) => {
-    return { id: option.id, name: option.name };
-  });
+  console.log(response);
 }
 
-// function to get properties for type
-function notionPropertiesById(properties) {
-  return Object.values(properties).reduce((obj, property) => {
-    const { id, ...rest } = property;
-    return { ...obj, [id]: rest };
-  }, {});
-}
 
 //function to build push new tile to notion
-function createWatchSuggestion({ title, summary, isWatched }) {
+function createWatchSuggestion({ title, summary, isWatched, media_type }) {
   notion.pages.create({
     parent: {
       database_id: process.env.NOTION_DATABASE_ID,
@@ -52,6 +61,16 @@ function createWatchSuggestion({ title, summary, isWatched }) {
           },
         ],
       },
+      [process.env.NOTION_MEDIA_TYPE]: {
+        rich_text: [
+          {
+            type: "text",
+            text: {
+              content: media_type,
+            },
+          },
+        ],
+      },
       [process.env.NOTION_STATUS]: {
         checkbox: isWatched,
       },
@@ -62,7 +81,7 @@ function createWatchSuggestion({ title, summary, isWatched }) {
       //   multi_select: types.map((types) => {
       //     return {
       //       id: types.id,
-      //       name: type.name,
+      //       name: types.name,
       //     };
       //   }),
       // },
@@ -70,4 +89,4 @@ function createWatchSuggestion({ title, summary, isWatched }) {
   });
 }
 
-export { createWatchSuggestion, getTypes };
+export { createWatchSuggestion, getDatabase };

@@ -6,8 +6,7 @@ import cors from "cors";
 
 app.use(cors());
 app.use(express.json());
-console.log(notion);
-
+//notion.getDatabase();
 app.post("/", (req, res) => {
   console.log(req.body);
   //notion.getTypes().then((types) => {
@@ -15,8 +14,8 @@ app.post("/", (req, res) => {
     title: req.body.title,
     summary: req.body.summary,
     isWatched: false,
-    //url: req.body.url,
-    //types: req.body.types,
+    media_type: req.body.type,
+    url: req.body.url,
   });
   //});
   res.send("added item");
@@ -25,3 +24,4 @@ app.post("/", (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${process.env.PORT}`);
 });
+
