@@ -9,9 +9,9 @@
           <media-card
             :lang="mediaInfo.original_language"
             :tagline="mediaInfo.tagline"
-            :title="mediaInfo.title"
+            :title="mediaInfo.title || mediaInfo.original_name"
             :summary="mediaInfo.overview"
-            :runtime="mediaInfo.runtime"
+            :runtime="mediaInfo.runtime || mediaInfo.episode_run_time"
             :rating="getDefaultRating"
             :vote_average="mediaInfo.vote_average"
             :release_date="mediaInfo.release_date"

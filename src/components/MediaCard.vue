@@ -100,8 +100,8 @@ export default {
         .post("http://localhost:3000/", {
           title: this.title,
           summary: this.summary,
-          url: this.url,
-          type: this.mediaType,
+          url: window.location.href,
+          type: this.$route.params.mediaType,
         })
         .then(function (response) {
           console.log(response);

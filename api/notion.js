@@ -35,7 +35,7 @@ async function getDatabase() {
 
 
 //function to build push new tile to notion
-function createWatchSuggestion({ title, summary, isWatched, media_type }) {
+function createWatchSuggestion({ title, summary, isWatched, media_type, link }) {
   notion.pages.create({
     parent: {
       database_id: process.env.NOTION_DATABASE_ID,
@@ -74,9 +74,9 @@ function createWatchSuggestion({ title, summary, isWatched, media_type }) {
       [process.env.NOTION_STATUS]: {
         checkbox: isWatched,
       },
-      // [process.env.NOTION_LINK]: {
-      //   url: url,
-      // },
+      [process.env.NOTION_LINK]: {
+        url: link,
+      },
       // [process.env.NOTION_TYPES]: {
       //   multi_select: types.map((types) => {
       //     return {

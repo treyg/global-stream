@@ -15,7 +15,7 @@ app.post("/", (req, res) => {
     summary: req.body.summary,
     isWatched: false,
     media_type: req.body.type,
-    url: req.body.url,
+    link: req.body.url,
   });
   //});
   res.send("added item");
