@@ -3,8 +3,7 @@
     <article>
       <router-link :to="{ name: 'PersonShow', params: { id: id } }">
         <figure>
-          <img v-if="img_path" :src="img_path" alt="" />
-          <img v-else src="https://via.placeholder.com/150" alt="" />
+          <img :src="img_path" alt="" @error="imgNotFound" />
           <figcaption>
             <h4>{{ name }}</h4>
             <h5>{{ character }}</h5>
@@ -37,6 +36,15 @@ export default {
     },
     combined_credits: {
       type: Object,
+    },
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    imgNotFound() {
+      event.target.src =
+        "https://via.placeholder.com/500x751?text=Image+Not+Found";
     },
   },
 };
