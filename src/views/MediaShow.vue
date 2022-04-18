@@ -28,7 +28,7 @@
       <!-- Stream provider section -->
       <article class="where-to-watch">
         <div class="content-wrapper">
-          <h2>Where to Stream</h2>
+          <h2 v-if="watchProviders">Where to Stream</h2>
           <div class="providers">
             <WatchProviders
               v-for="provider in watchProviders"

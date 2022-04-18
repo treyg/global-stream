@@ -19,10 +19,24 @@
         <h3 v-if="person.biography">Biography</h3>
         <p>{{ person.biography }}</p>
         <div class="credit-wrapper">
-          <h3>Credits</h3>
+          <h3>Acted in</h3>
           <div class="credit-container">
             <MediaCard
-              v-for="credit in combined_credits"
+              v-for="credit in acting_credits"
+              v-if="credit.poster_path"
+              :key="credit.credit_id"
+              :id="credit.id"
+              :lang="credit.original_language"
+              :title="credit.title"
+              :type="credit.media_type"
+              :vote_average="credit.vote_average"
+              :poster_path="`${img_base_url}${credit.poster_path}`"
+            />
+          </div>
+          <h3>Directed</h3>
+          <div class="credit-container">
+            <MediaCard
+              v-for="credit in director_credits"
               v-if="credit.poster_path"
               :key="credit.credit_id"
               :id="credit.id"
@@ -52,6 +66,8 @@ export default {
       STATIC_API: "https://api.themoviedb.org/3/person",
       person: [],
       combined_credits: [],
+      acting_credits: [],
+      director_credits: [],
     };
   },
   methods: {
@@ -62,7 +78,11 @@ export default {
       );
       const data = await response.json();
       this.person = data;
-      this.combined_credits = data.combined_credits.cast;
+      this.combined_credits = data.combined_credits;
+      this.acting_credits = data.combined_credits.cast;
+      this.director_credits = data.combined_credits.crew.filter(
+        (credit) => credit.job === "Director"
+      );
     },
   },
   created: async function () {
@@ -90,7 +110,7 @@ export default {
 }
 
 h3 {
-  font-size: 3.9em;
+  font-size: 4.2em;
   margin: 1.2em auto 0.6em;
 }
 
@@ -103,6 +123,7 @@ p {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(21em, 1fr));
   gap: 4em;
+  margin-bottom: 20em;
 }
 /* Styling for person card component */
 ::v-deep .person-card a {

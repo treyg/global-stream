@@ -11,10 +11,13 @@ Built with Vue, Node and Express.
 - [x] Create modal to show available streaming locations for each provider.
 - [x] Build components to show cast on movie pages
 - [x] Add route transitions
-- [ ] Create 'show more' button for search results
-- [ ] Add search option for director/actor
-- [x] Add select option for which countries' popular movies show on homepage
-- [ ] Make API fetch methods reusable/cleanup repeated code
-- [ ] Add TV filter option for search
 - [x] Style globally.
 - [x] Style for desktop.
+- [ ] Create 'show more' button for search results
+- [x] Add search option for director/actor
+- [x] Show credits for acting and directing
+- [x] Add select option for which countries' popular movies show on homepage
+- [ ] Make API fetch methods reusable/cleanup repeated code
+- [x] Add TV filter option for search
+- [ ] Add list page and save results to local storage
+
