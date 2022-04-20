@@ -57,6 +57,8 @@ article {
 
 figure {
   margin: 0;
+  max-width: 50em;
+  margin: auto;
 }
 
 a {

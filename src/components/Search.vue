@@ -77,7 +77,12 @@ export default {
       this.results = fullData.filter(
         (result) => result.media_type === this.searchType
       );
-
+      //handle if no results are found
+      if (this.results.length === 0) {
+        document.querySelector(".search-results").innerHTML = `
+          <h3>No results found</h3>
+        `;
+      }
       if (this.searchType !== "person") {
         this.sortByRating();
       }
