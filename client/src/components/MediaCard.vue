@@ -97,7 +97,7 @@ export default {
     saveMedia() {
       //function to push prop data to watchlist
       axios
-        .post("https://68.183.129.164:3000/", {
+        .post("http://68.183.129.164:3000/", {
           title: this.title,
           summary: this.summary,
           url: window.location.href,
