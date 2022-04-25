@@ -4,7 +4,12 @@ const app = express();
 import * as notion from "./notion.js";
 import cors from "cors";
 
-app.use(cors());
+app.use(cors
+  ({
+    origin: "https://stream-notion.netlify.app",
+  })
+);
+
 app.use(express.json());
 //notion.getDatabase();
 app.post("/", (req, res) => {
