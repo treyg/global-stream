@@ -97,7 +97,7 @@ export default {
     saveMedia() {
       //function to push prop data to watchlist
       axios
-        .post("http://68.183.129.164:3000/", {
+        .post("https://stream-notion-api.xyz:3000", {
           title: this.title,
           summary: this.summary,
           url: window.location.href,
