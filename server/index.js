@@ -6,7 +6,7 @@ import cors from "cors";
 
 app.use(cors
   ({
-    origin: "https://stream-notion.netlify.app",
+    origin: "*",
   })
 );
 
