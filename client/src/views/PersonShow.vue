@@ -155,4 +155,11 @@ p {
   width: 100%;
   margin: 0;
 }
+
+@media (min-width: 769px) {
+  .content-wrapper {
+    display: flex;
+    gap: 10em;
+  }
+}
 </style>

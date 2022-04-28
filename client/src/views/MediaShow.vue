@@ -11,10 +11,10 @@
             :tagline="mediaInfo.tagline"
             :title="mediaInfo.title || mediaInfo.original_name"
             :summary="mediaInfo.overview"
-            :runtime="mediaInfo.runtime || mediaInfo.episode_run_time"
+            :runtime="runtime"
             :rating="getDefaultRating"
             :vote_average="mediaInfo.vote_average"
-            :release_date="mediaInfo.release_date"
+            :release_date="releaseDate"
             :poster_path="`${poster_base_url}${mediaInfo.poster_path}`"
           >
             <template slot="genre">
@@ -109,7 +109,7 @@ export default {
       this.locations = data["watch/providers"].results;
       this.mediaInfo = data;
       this.cast = data.credits.cast;
-      this.rating = data.release_dates.results;
+      //this.rating = data.release_dates.results;
 
       // Filter to show only only countries with options to stream
       const streams = Object.entries(this.locations).filter((media) =>
@@ -211,6 +211,20 @@ export default {
       const firstUS = [...this.rating].find((item) => item.iso_3166_1 === "US");
       if (!firstUS) return null;
       return firstUS.release_dates[0].certification;
+    },
+    runtime: function () {
+      if (this.mediaType === "movie") {
+        return this.mediaInfo.runtime;
+      } else {
+        return this.mediaInfo.episode_run_time?.[0];
+      }
+    },
+    releaseDate: function () {
+      if (this.mediaType === "movie") {
+        return this.mediaInfo.release_date;
+      } else {
+        return this.mediaInfo.first_air_date;
+      }
     },
   },
 };
