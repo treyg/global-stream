@@ -42,13 +42,6 @@
       </div>
       <div class="button-container">
         <SaveButton id="saveBtn" v-on:addToWatchList="saveMedia" />
-        <!-- <router-link
-          v-if="id"
-          class="view-media-btn"
-          :to="{ name: 'MediaShow', params: { id: id, lang: lang } }"
-        >
-          View
-        </router-link> -->
       </div>
     </div>
   </article>
@@ -83,7 +76,7 @@ export default {
     //Media Provider Data
     provider: String,
     provider_logo: String,
-    runtime: Number,
+    runtime: [Array, Number],
     rating: String,
     genre: Array,
   },
@@ -231,6 +224,8 @@ figure:hover {
   justify-content: center;
   gap: 3em;
   align-items: center;
+  width: max-content;
+  margin-left: auto;
 }
 
 .details {
