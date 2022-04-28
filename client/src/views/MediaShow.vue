@@ -40,6 +40,21 @@
           </div>
         </div>
       </article>
+      <!-- Director Section -->
+      <article>
+        <div class="content-wrapper">
+          <h2>Director</h2>
+          <div class="director">
+            <PersonCard
+              v-for="director in directors"
+              :key="director.id"
+              :name="director.name"
+              :img_path="`${poster_base_url}${director.profile_path}`"
+              :id="director.id"
+            />
+          </div>
+        </div>
+      </article>
       <!-- Cast Section -->
       <article>
         <div class="content-wrapper">
@@ -98,6 +113,7 @@ export default {
       placesToWatch: [],
       cast: [],
       rating: [],
+      directors: [],
     };
   },
   methods: {
@@ -189,6 +205,17 @@ export default {
         this.mediaType = this.$route.params.mediaType;
       }
     },
+    getDirectors() {
+      if (this.mediaType === "movie") {
+        this.directors = this.mediaInfo.credits.crew.filter(
+          (crew) => crew.job === "Director"
+        );
+      } else {
+        this.directors = this.mediaInfo.credits.crew.filter(
+          (crew) => crew.job === "Executive Producer"
+        );
+      }
+    },
   },
   filters: {
     fullCountryName(country) {
@@ -201,6 +228,7 @@ export default {
   mounted: async function () {
     await this.populateMediaInfo();
     this.findProviders();
+    this.getDirectors();
   },
   beforeMount() {
     this.checkMediaType();
@@ -328,6 +356,12 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(21em, 1fr));
   gap: 4em;
+  margin-bottom: 10rem;
+}
+
+.director {
+  display: flex;
+  justify-content: center;
 }
 
 /* desktop adjustments */
@@ -337,6 +371,11 @@ h2 {
   }
 
   .providers {
+    justify-content: start;
+  }
+
+  .director {
+    display: flex;
     justify-content: start;
   }
 }
