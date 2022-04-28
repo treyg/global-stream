@@ -296,27 +296,6 @@ figure:hover {
     font-size: 6em !important;
   }
 
-  h3 {
-  }
-
-  p {
-  }
-
-  .details .release-date {
-  }
-
-  .media-card figure {
-  }
-
-  .votes {
-  }
-
-  .card {
-  }
-
-  .button-container {
-  }
-
   .button-container button {
     position: absolute;
     bottom: 0;
@@ -327,21 +306,6 @@ figure:hover {
     order: 2;
     display: flex;
     align-items: start;
-  }
-
-  .details span {
-  }
-
-  .runtime_rating {
-  }
-
-  .genre_wrapper {
-  }
-
-  .details img {
-  }
-
-  .view-media-btn {
   }
 }
 </style>

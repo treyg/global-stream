@@ -27,7 +27,7 @@
         v-if="result.poster_path"
         :key="result.id"
         :id="result.id"
-        :lang="result.original_language"
+        :lang="en"
         :title="result.title"
         :mediaType="result.media_type"
         :vote_average="result.vote_average"
@@ -125,20 +125,25 @@ input {
   width: 100%;
 }
 
+input[type="text"] {
+  font-size: 2.4rem;
+}
+
+::placeholder {
+  font-size: 1em;
+}
+
 select {
   border-left: none;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   font-size: 2.5rem;
   margin-right: 0.5em;
+  padding-left: 0.5em;
 }
 
 .option {
   font-size: 2.5rem;
-}
-
-::placeholder {
-  font-size: 2.4rem;
 }
 
 input:focus,
