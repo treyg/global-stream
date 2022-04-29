@@ -122,13 +122,13 @@ export default {
       let mediaItemExists = mediaList.find((item) => {
         return item.title === mediaItem.title;
       });
-      // if (mediaItemExists) {
-      //   console.log("mediaItem already exists");
-      //   //styling here
-      // } else {
-      mediaList.push(mediaItem);
-      localStorage.setItem("mediaList", JSON.stringify(mediaList));
-      //}
+      if (mediaItemExists) {
+        console.log("mediaItem already exists");
+        //styling here
+      } else {
+        mediaList.push(mediaItem);
+        localStorage.setItem("mediaList", JSON.stringify(mediaList));
+      }
     },
   },
   computed: {
