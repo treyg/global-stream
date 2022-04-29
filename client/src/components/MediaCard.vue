@@ -96,6 +96,7 @@ export default {
           url: window.location.href,
           type: this.$route.params.mediaType,
         })
+        //save media to local storage
         .then(function (response) {
           console.log(response);
           const saveBtn = document.getElementById("saveBtn");
@@ -105,6 +106,29 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+      let mediaItem = {
+        title: this.title,
+        summary: this.summary,
+        url: window.location.href,
+        type: this.$route.params.mediaType,
+      };
+
+      //push mediaItem to object in local storage
+      let mediaList = JSON.parse(localStorage.getItem("mediaList"));
+      if (mediaList === null) {
+        mediaList = [];
+      }
+      //check if mediaItem is already in local storage
+      let mediaItemExists = mediaList.find((item) => {
+        return item.title === mediaItem.title;
+      });
+      // if (mediaItemExists) {
+      //   console.log("mediaItem already exists");
+      //   //styling here
+      // } else {
+      mediaList.push(mediaItem);
+      localStorage.setItem("mediaList", JSON.stringify(mediaList));
+      //}
     },
   },
   computed: {
