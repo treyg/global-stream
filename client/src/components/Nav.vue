@@ -16,13 +16,13 @@
           >
         </li>
         <li>
-          <router-link aria-label="My list." to="/mylist">
+          <router-link aria-label="My list." to="/my-list">
             <img class="sm-only" src="../assets/list.svg" />
             <span class="lg-only">My List</span>
           </router-link>
         </li>
         <li>
-          <a @click="focusSearch" aria-label="Search.">
+          <a @click="focusSearch" aria-label="Search." class="search-link">
             <img class="sm-only" src="../assets/search.svg" /><span
               class="lg-only"
               >Search</span
@@ -109,6 +109,10 @@ export default {
     font-weight: bold;
     line-height: 1;
     padding: 0;
+  }
+
+  .search-link {
+    cursor: pointer;
   }
 
   #nav-list li a:after,

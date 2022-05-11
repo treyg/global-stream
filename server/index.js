@@ -26,6 +26,14 @@ app.post("/", (req, res) => {
   res.send("added item");
 });
 
+// app.get("/", (req, res) => {
+//   notion.getSuggestions().then((suggestions) => {
+//     console.log(suggestions);
+//     res.send(suggestions);
+//   });
+// });
+
+
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port ${process.env.PORT}`);
 });

@@ -88,5 +88,30 @@ function createWatchSuggestion({ title, summary, isWatched, media_type, link }) 
     },
   });
 }
-
 export { createWatchSuggestion, getDatabase };
+//Function to get all suggestions from notion
+// async function getSuggestions() {
+//   const notionPages = await notion.databases.query({
+//     database_id: process.env.NOTION_DATABASE_ID,
+//     sorts: [{ property: process.env.NOTION_TITLE, direction: "ascending" }],
+//   });
+
+//   return notionPages.map(fromNotionObject);
+// }
+
+// function fromNotionObject(notionPage) {
+//   const notionPropertiesById = notionPropertiesById(notionPage.properties);
+
+//   return {
+//     //id: notionPage.id,
+//     title: notionPropertiesById[process.env.NOTION_TITLE].title[0].text.content,
+//     summary: notionPropertiesById[process.env.NOTION_SUMMARY].rich_text[0].text.content,
+//     isWatched: notionPropertiesById[process.env.NOTION_STATUS].checkbox,
+//     media_type: notionPropertiesById[process.env.NOTION_MEDIA_TYPE].rich_text[0].text.content,
+//     link: notionPropertiesById[process.env.NOTION_LINK].url,
+//   };
+
+// }
+
+
+// export { createWatchSuggestion, getDatabase, getSuggestions };
