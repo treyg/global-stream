@@ -14,7 +14,6 @@
     "vue": "^2.6.11",
     "vue-horizontal": "^0.8.12",
     "vue-router": "^3.5.3",
-    "webpack": "^4.39.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
