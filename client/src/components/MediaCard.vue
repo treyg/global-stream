@@ -1,17 +1,13 @@
 <template>
   <article class="media-card">
-    <router-link
-      class="image-link"
-      :to="{
-        name: 'MediaShow',
-        params: { mediaType: mediaType, id: id, lang: lang },
-      }"
-    >
+    <router-link class="image-link" :to="{
+      name: 'MediaShow',
+      params: { mediaType: mediaType, id: id, lang: lang },
+    }">
       <figure>
         <img :src="poster_path" alt="" />
         <span class="votes" :class="computedRatingClass">
-          {{ vote_average * 10 }}%</span
-        >
+          {{ vote_average * 10 }}%</span>
       </figure>
     </router-link>
     <div>
@@ -21,11 +17,9 @@
             {{ release_date | cutDate }}
           </p>
           <div class="runtime_rating">
-            <span
-              ><img src="../assets/clock.svg" alt="" />{{
+            <span><img src="../assets/clock.svg" alt="" />{{
                 runtime | toHoursAndMinutes
-              }}</span
-            >
+            }}</span>
             <span>{{ rating }}</span>
           </div>
           <div class="genre_wrapper">
@@ -162,6 +156,7 @@ export default {
 .media-card {
   text-align: left;
 }
+
 .saved {
   background-color: var(--success);
   color: var(--text-primary);
@@ -310,10 +305,11 @@ figure:hover {
     flex-direction: row;
     align-items: center;
   }
+
   .hero-content-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
   }
 
   h2 {
@@ -329,7 +325,7 @@ figure:hover {
   .details {
     order: 2;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
   }
 }
 </style>

@@ -90,9 +90,9 @@
   </div>
 </template>
 <script>
-import WatchProviders from "@/components/WatchProviders.vue";
-import MediaCard from "@/components/MediaCard.vue";
-import PersonCard from "@/components/PersonCard.vue";
+import WatchProviders from "../components/WatchProviders.vue";
+import MediaCard from "../components/MediaCard.vue";
+import PersonCard from "../components/PersonCard.vue";
 import LocationModal from "../components/LocationModal.vue";
 export default {
   name: "MediaShow",
@@ -261,6 +261,7 @@ export default {
 main {
   padding-bottom: 5em;
 }
+
 .main-content {
   width: 100%;
   display: flex;
