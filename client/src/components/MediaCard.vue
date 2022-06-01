@@ -104,6 +104,7 @@ export default {
         title: this.title,
         summary: this.summary,
         url: window.location.href,
+        image: this.poster_path,
         type: this.$route.params.mediaType,
       };
 
