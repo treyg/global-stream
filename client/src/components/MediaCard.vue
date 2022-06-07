@@ -1,13 +1,17 @@
 <template>
   <article class="media-card">
-    <router-link class="image-link" :to="{
-      name: 'MediaShow',
-      params: { mediaType: mediaType, id: id, lang: lang },
-    }">
+    <router-link
+      class="image-link"
+      :to="{
+        name: 'MediaShow',
+        params: { mediaType: mediaType, id: id, lang: lang },
+      }"
+    >
       <figure>
         <img :src="poster_path" alt="" />
         <span class="votes" :class="computedRatingClass">
-          {{ vote_average * 10 }}%</span>
+          {{ vote_average * 10 }}%</span
+        >
       </figure>
     </router-link>
     <div>
@@ -17,9 +21,11 @@
             {{ release_date | cutDate }}
           </p>
           <div class="runtime_rating">
-            <span><img src="../assets/clock.svg" alt="" />{{
+            <span
+              ><img src="../assets/clock.svg" alt="" />{{
                 runtime | toHoursAndMinutes
-            }}</span>
+              }}</span
+            >
             <span>{{ rating }}</span>
           </div>
           <div class="genre_wrapper">
@@ -78,7 +84,7 @@ export default {
     return {};
   },
   mounted() {
-    // this.checkOnList();
+    this.checkOnList();
   },
   methods: {
     saveMedia() {
@@ -103,26 +109,36 @@ export default {
       let mediaItem = {
         title: this.title,
         summary: this.summary,
-        url: window.location.href,
+        url: this.url,
+        id: this.id,
+        vote_average: this.vote_average,
+        runtime: this.runtime,
         image: this.poster_path,
         type: this.$route.params.mediaType,
+        lang: this.lang,
       };
-
       //push mediaItem to object in local storage
       let mediaList = JSON.parse(localStorage.getItem("mediaList"));
       if (mediaList === null) {
         mediaList = [];
       }
-      //check if mediaItem is already in local storage
-      let mediaItemExists = mediaList.find((item) => {
-        return item.title === mediaItem.title;
-      });
-      if (mediaItemExists) {
-        console.log("mediaItem already exists");
-        //styling here
-      } else {
-        mediaList.push(mediaItem);
-        localStorage.setItem("mediaList", JSON.stringify(mediaList));
+      mediaList.push(mediaItem);
+      localStorage.setItem("mediaList", JSON.stringify(mediaList));
+    },
+    //check if media is on watchlist
+    checkOnList() {
+      let mediaList = JSON.parse(localStorage.getItem("mediaList"));
+      if (this.$route.name == "MediaShow") {
+        if (mediaList !== null) {
+          mediaList.forEach((item) => {
+            if (item.id == this.$route.params.id) {
+              const saveBtn = document.getElementById("saveBtn");
+              saveBtn.classList.add("saved");
+              saveBtn.innerHTML = "Saved";
+              saveBtn.style.pointerEvents = "none";
+            }
+          });
+        }
       }
     },
   },

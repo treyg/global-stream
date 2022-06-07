@@ -1,15 +1,17 @@
 <template>
   <div>
     <h1>My List</h1>
-    <!-- <div v-for="item in mediaList" :key="item.id">
-            <h2>{{ item.title }}</h2>
-        </div> -->
-    <media-card
-      v-for="item in mediaList"
-      :key="item.id"
-      :poster_path="item.image"
-      :title="item.title || item.original_name"
-    />
+    <div class="card-grid">
+      <media-card
+        v-for="item in mediaList"
+        :key="item.id"
+        :poster_path="item.image"
+        :vote_average="item.vote_average"
+        :title="item.title"
+        :lang="item.lang"
+        :id="item.id"
+      />
+    </div>
   </div>
 </template>
 
@@ -34,4 +36,17 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+::v-deep .hero-content-wrapper {
+  display: none;
+}
+::v-deep .media-card a {
+  display: block;
+  width: max-content;
+}
+</style>

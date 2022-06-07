@@ -11,6 +11,7 @@
             :tagline="mediaInfo.tagline"
             :title="mediaInfo.title || mediaInfo.original_name"
             :summary="mediaInfo.overview"
+            :id="mediaInfo.id"
             :runtime="runtime"
             :rating="getDefaultRating"
             :vote_average="mediaInfo.vote_average"
