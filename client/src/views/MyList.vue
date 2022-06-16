@@ -37,16 +37,31 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 6rem;
+  padding-top: 9rem;
+  padding-bottom: 0;
+  margin: 0;
+}
 .card-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50rem, 1fr));
 }
 
 ::v-deep .hero-content-wrapper {
   display: none;
 }
+
+::v-deep .media-card {
+  margin: auto;
+}
+
 ::v-deep .media-card a {
   display: block;
-  width: max-content;
+  width: 100%;
+}
+
+::v-deep .media-card #saveBtn {
+  display: none;
 }
 </style>
