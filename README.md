@@ -1,4 +1,4 @@
-# Where Can I Watch - Movie App
+# Where Can I Watch - stream finder
 
 Movie finder application that uses TMDB API to allow users to search movies globally and find streaming options for any location or provider.
 
