@@ -48,7 +48,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import SaveButton from "./SaveButton.vue";
 
 export default {
@@ -89,23 +88,23 @@ export default {
   methods: {
     saveMedia() {
       //function to push prop data to watchlist
-      axios
-        .post("https://stream-notion-api.xyz", {
-          title: this.title,
-          summary: this.summary,
-          url: window.location.href,
-          type: this.$route.params.mediaType,
-        })
-        //save media to local storage
-        .then(function (response) {
-          console.log(response);
-          const saveBtn = document.getElementById("saveBtn");
-          saveBtn.classList.add("saved");
-          saveBtn.innerHTML = "Saved";
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      // axios
+      //   .post("https://stream-notion-api.xyz", {
+      //     title: this.title,
+      //     summary: this.summary,
+      //     url: window.location.href,
+      //     type: this.$route.params.mediaType,
+      //   })
+      //   //save media to local storage
+      //   .then(function (response) {
+      //     console.log(response);
+      //     const saveBtn = document.getElementById("saveBtn");
+      //     saveBtn.classList.add("saved");
+      //     saveBtn.innerHTML = "Saved";
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
       let mediaItem = {
         title: this.title,
         summary: this.summary,
@@ -124,6 +123,10 @@ export default {
       }
       mediaList.push(mediaItem);
       localStorage.setItem("mediaList", JSON.stringify(mediaList));
+
+      const saveBtn = document.getElementById("saveBtn");
+      saveBtn.classList.add("saved");
+      saveBtn.innerHTML = "Saved";
     },
     //check if media is on watchlist
     checkOnList() {
@@ -136,6 +139,7 @@ export default {
               saveBtn.classList.add("saved");
               saveBtn.innerHTML = "Saved";
               saveBtn.style.pointerEvents = "none";
+              saveBtn.style.cursor = "not-allowed";
             }
           });
         }
