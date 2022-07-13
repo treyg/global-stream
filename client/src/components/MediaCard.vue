@@ -42,6 +42,7 @@
       </div>
       <div class="button-container">
         <SaveButton id="saveBtn" v-on:addToWatchList="saveMedia" />
+        <slot name="removeBtn" />
       </div>
     </div>
   </article>
