@@ -1,7 +1,12 @@
 <template>
   <nav class="nav-wrapper">
     <ul id="nav-list">
-      <img @click="goHome" src="../assets/logo.svg" alt="logo" class="logo" />
+      <img
+        @click="goHome"
+        src="../assets/logo.svg"
+        alt="logo"
+        class="logo lg-only"
+      />
       <div class="nav-list--li-wrap">
         <li>
           <router-link aria-label="Home." to="/"
