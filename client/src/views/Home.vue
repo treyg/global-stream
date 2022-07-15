@@ -1,3 +1,5 @@
+  <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
+
 <template>
   <div class="home">
     <section class="hero">

@@ -47,7 +47,7 @@
           <h2>Director</h2>
           <div class="director">
             <PersonCard
-              v-for="director in directors"
+              v-for="director in directors.slice(0, 1)"
               :key="director.id"
               :name="director.name"
               :img_path="`${poster_base_url}${director.profile_path}`"

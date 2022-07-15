@@ -63,15 +63,22 @@ h1 {
 }
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(50rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+  width: min(100% - 5rem);
+  margin-inline: auto;
+  gap: 5rem;
   padding-bottom: 15em;
+  justify-items: center;
 }
 
 .remove-btn {
-  background-color: var(--warning);
+  background-color: var(--danger);
   color: var(--text-primary);
   width: max-content;
   height: max-content;
+  opacity: 0;
+  padding: 1rem;
+  transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {
@@ -80,7 +87,27 @@ h1 {
 }
 
 .remove-btn img {
-  width: 3.5rem;
+  width: 6.5rem;
+}
+
+::v-deep .media-card:hover .remove-btn {
+  opacity: 1;
+  filter: none;
+}
+
+::v-deep .media-card:hover img {
+  filter: brightness(0.8) contrast(1.32) grayscale(0.35) opacity(0.81)
+    saturate(1.67);
+}
+
+::v-deep .media-card img {
+  transition: all 0.3s ease;
+}
+
+::v-deep .media-card figure {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .clear-btn {
@@ -97,6 +124,7 @@ h1 {
 ::v-deep .media-card {
   margin: auto;
   flex-direction: column;
+  position: relative;
 }
 
 ::v-deep .media-card a {
@@ -105,6 +133,13 @@ h1 {
 }
 
 ::v-deep .button-container {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+::v-deep .button-container button {
   position: relative;
 }
 
