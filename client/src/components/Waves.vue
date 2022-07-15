@@ -55,7 +55,6 @@ export default {
   bottom: 0;
   position: absolute;
   left: 0px;
-  float: left;
 }
 .parallax1 > use {
   animation: move-forever1 10s linear infinite;
