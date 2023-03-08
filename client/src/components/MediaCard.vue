@@ -10,8 +10,8 @@
       <figure>
         <img :src="poster_path" alt="" />
         <span class="votes" :class="computedRatingClass">
-          {{ vote_average * 10 }}%</span
-        >
+          {{ Math.round(vote_average * 10) }}%
+        </span>
       </figure>
     </router-link>
     <div>
@@ -88,24 +88,6 @@ export default {
   },
   methods: {
     saveMedia() {
-      //function to push prop data to watchlist
-      // axios
-      //   .post("https://stream-notion-api.xyz", {
-      //     title: this.title,
-      //     summary: this.summary,
-      //     url: window.location.href,
-      //     type: this.$route.params.mediaType,
-      //   })
-      //   //save media to local storage
-      //   .then(function (response) {
-      //     console.log(response);
-      //     const saveBtn = document.getElementById("saveBtn");
-      //     saveBtn.classList.add("saved");
-      //     saveBtn.innerHTML = "Saved";
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
       let mediaItem = {
         title: this.title,
         summary: this.summary,
