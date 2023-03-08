@@ -193,10 +193,8 @@ export default {
           provider_IdAlt4,
         ].includes(platform_id);
       });
-      //Set placesToWatch as provider.country
-      this.placesToWatch.map((provider) => {
-        provider.country;
-      });
+      //Set placesToWatch as provider.country in alphabetical order
+      this.placesToWatch.sort((a, b) => a.country.localeCompare(b.country));
       this.showModal = true;
     },
     checkMediaType() {
