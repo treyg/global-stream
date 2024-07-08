@@ -27,9 +27,9 @@
         </div>
       </section>
       <!-- Stream provider section -->
-      <article class="where-to-watch">
+      <article class="where-to-watch" v-if="watchProviders.length > 0">
         <div class="content-wrapper">
-          <h2 v-if="watchProviders">Where to Stream</h2>
+          <h2>Where to Stream</h2>
           <div class="providers">
             <WatchProviders
               v-for="provider in watchProviders"
@@ -42,7 +42,7 @@
         </div>
       </article>
       <!-- Director Section -->
-      <article>
+      <article v-if="directors.length > 0">
         <div class="content-wrapper">
           <h2>Director</h2>
           <div class="director">
@@ -50,14 +50,19 @@
               v-for="director in directors.slice(0, 1)"
               :key="director.id"
               :name="director.name"
-              :img_path="`${poster_base_url}${director.profile_path}`"
+              :img_path="
+                director.profile_path
+                  ? `${poster_base_url}${director.profile_path}`
+                  : ''
+              "
               :id="director.id"
             />
           </div>
         </div>
       </article>
+
       <!-- Cast Section -->
-      <article>
+      <article v-if="cast.length > 0">
         <div class="content-wrapper">
           <h2>Cast</h2>
           <div class="cast">
@@ -66,13 +71,16 @@
               :key="person.id"
               :name="person.name"
               :character="person.character"
-              :img_path="`${poster_base_url}${person.profile_path}`"
+              :img_path="
+                person.profile_path
+                  ? `${poster_base_url}${person.profile_path}`
+                  : ''
+              "
               :id="person.id"
             />
           </div>
         </div>
       </article>
-
       <!-- Stream option modal -->
       <location-modal v-if="showModal" @close="showModal = false">
         <template v-slot:countries>
@@ -107,7 +115,7 @@ export default {
       mediaType: null,
       backdrop_base_url: "https://image.tmdb.org/t/p/original",
       poster_base_url: "https://image.tmdb.org/t/p/w500",
-      STATIC_API: "https://api.themoviedb.org/3/",
+      STATIC_API: "https://api.themoviedb.org/3",
       //
       watchProviders: [],
       locations: [],
@@ -119,26 +127,53 @@ export default {
   },
   methods: {
     async populateMediaInfo() {
-      const response = await fetch(
-        `${this.STATIC_API}/${this.mediaType}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos,credits,release_dates,similar,recommendations`
-      );
-      const data = await response.json();
-      this.locations = data["watch/providers"].results;
-      this.mediaInfo = data;
-      this.cast = data.credits.cast;
-      //this.rating = data.release_dates.results;
+      try {
+        const response = await fetch(
+          `${this.STATIC_API}/${this.mediaType}/${this.mediaID}?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=${this.lang}&append_to_response=watch/providers,videos,credits,release_dates,similar,recommendations`
+        );
+        const data = await response.json();
 
-      // Filter to show only only countries with options to stream
-      const streams = Object.entries(this.locations).filter((media) =>
-        Object.prototype.hasOwnProperty.call(media[1], "flatrate")
-      );
-      //convert streams to object
-      this.locations = streams.reduce((acc, curr) => {
-        acc[curr[0]] = curr[1];
-        return acc;
-      }, {});
+        this.mediaInfo = data;
+
+        // Check for credits and cast
+        if (data.credits && Array.isArray(data.credits.cast)) {
+          this.cast = data.credits.cast;
+        } else {
+          this.cast = [];
+        }
+
+        // Check for watch providers
+        if (data["watch/providers"] && data["watch/providers"].results) {
+          this.locations = data["watch/providers"].results;
+
+          // Filter to show only countries with options to stream
+          const streams = Object.entries(this.locations).filter((media) =>
+            Object.prototype.hasOwnProperty.call(media[1], "flatrate")
+          );
+          //convert streams to object
+          this.locations = streams.reduce((acc, curr) => {
+            acc[curr[0]] = curr[1];
+            return acc;
+          }, {});
+        } else {
+          this.locations = {};
+        }
+
+        // Check for release dates
+        if (data.release_dates && Array.isArray(data.release_dates.results)) {
+          this.rating = data.release_dates.results;
+        } else {
+          this.rating = [];
+        }
+      } catch (error) {
+        console.error("Error fetching media info:", error);
+        // Handle the error appropriately (e.g., show an error message to the user)
+      }
     },
     findProviders() {
+      if (Object.keys(this.locations).length === 0) {
+        return;
+      }
       for (const property in this.locations) {
         for (const [key, value] of Object.entries(this.locations[property])) {
           if (key === "flatrate") {
@@ -205,6 +240,14 @@ export default {
       }
     },
     getDirectors() {
+      if (
+        !this.mediaInfo.credits ||
+        !Array.isArray(this.mediaInfo.credits.crew)
+      ) {
+        this.directors = [];
+        return;
+      }
+
       if (this.mediaType === "movie") {
         this.directors = this.mediaInfo.credits.crew.filter(
           (crew) => crew.job === "Director"
