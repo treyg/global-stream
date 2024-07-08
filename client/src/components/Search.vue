@@ -27,7 +27,7 @@
         v-if="result.poster_path"
         :key="result.id"
         :id="result.id"
-        :lang="en"
+        :lang="language"
         :title="result.title"
         :mediaType="result.media_type"
         :vote_average="result.vote_average"
@@ -56,6 +56,7 @@ export default {
     return {
       search: "",
       results: [],
+      language: "en",
       searchType: "movie",
       searchTypeOptions: [
         { id: "movie", name: "Movie" },

@@ -26,7 +26,7 @@
               v-if="credit.poster_path"
               :key="credit.credit_id"
               :id="credit.id"
-              :lang="en"
+              :lang="language"
               :title="credit.title"
               :type="credit.media_type"
               :vote_average="credit.vote_average"
@@ -40,7 +40,7 @@
               v-if="credit.poster_path"
               :key="credit.credit_id"
               :id="credit.id"
-              :lang="en"
+              :lang="language"
               :title="credit.title"
               :type="credit.media_type"
               :vote_average="credit.vote_average"
@@ -68,6 +68,7 @@ export default {
       combined_credits: [],
       acting_credits: [],
       director_credits: [],
+      language: "en",
     };
   },
   methods: {

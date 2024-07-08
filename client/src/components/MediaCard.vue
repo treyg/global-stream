@@ -68,7 +68,10 @@ export default {
     summary: String,
     tagline: String,
     link: String,
-    lang: String,
+    lang: {
+      type: String,
+      default: "en",
+    },
     url: String,
     onList: Boolean,
     media: {},
