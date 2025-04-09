@@ -2,9 +2,12 @@
   "name": "global-stream",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=21.0.0"
+  },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
