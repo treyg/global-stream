@@ -16,38 +16,37 @@
 
 <script>
 export default {
-  name: "PersonCard",
+  name: 'PersonCard',
   props: {
     name: {
-      type: String,
+      type: String
     },
     character: {
-      type: String,
+      type: String
     },
     img_path: {
-      type: String,
+      type: String
     },
     id: {
       type: Number,
-      required: false,
+      required: false
     },
     bio: {
-      type: String,
+      type: String
     },
     combined_credits: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   data() {
-    return {};
+    return {}
   },
   methods: {
     imgNotFound() {
-      event.target.src =
-        "https://via.placeholder.com/500x751?text=Image+Not+Found";
-    },
-  },
-};
+      event.target.src = 'https://placehold.co/500x751?text=Image+Not+Found'
+    }
+  }
+}
 </script>
 
 <style scoped>
